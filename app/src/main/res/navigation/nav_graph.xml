@@ -10,16 +10,16 @@
         android:name="com.example.recursivecontainermanager.fragments.MainFragment"
         android:label="@string/app_name">
         <action
-            android:id="@+id/action_mainFragment_to_itemEditionFragment"
-            app:destination="@id/itemEditionFragment" />
+            android:id="@+id/action_mainFragment_to_mainMenuFragment"
+            app:destination="@id/mainMenuFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/itemEditionFragment"
-        android:name="com.example.recursivecontainermanager.fragments.ItemEditionFragment"
-        android:label="@string/app_name">
+        android:id="@+id/mainMenuFragment"
+        android:name="com.example.recursivecontainermanager.fragments.MainMenuFragment"
+        android:label="Main Menu">
         <action
-            android:id="@+id/action_itemEditionFragment_to_mainFragment"
+            android:id="@+id/action_mainMenuFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
 </navigation>

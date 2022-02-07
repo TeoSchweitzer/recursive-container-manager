@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import com.example.recursivecontainermanager.databinding.ItemEditionFragmentBinding
+import com.example.recursivecontainermanager.databinding.MainMenuFragmentBinding
 
-class ItemEditionFragment: Fragment() {
-    private var _binding: ItemEditionFragmentBinding? = null
+class MainMenuFragment: Fragment() {
+    private var _binding: MainMenuFragmentBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -17,13 +17,7 @@ class ItemEditionFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = ItemEditionFragmentBinding.inflate(inflater, container, false)
-
-        binding.enterItemButton.setOnClickListener {
-            val action = ItemEditionFragmentDirections.actionItemEditionFragmentToMainFragment()
-            binding.root.findNavController().navigate(action)
-        }
-
+        _binding = MainMenuFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
