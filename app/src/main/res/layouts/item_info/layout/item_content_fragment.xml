@@ -6,29 +6,35 @@
     android:layout_height="match_parent">
 
     <EditText
+        android:id="@+id/name_tag_filter_field"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Tag/Name Filter"/>
 
     <Button
+        android:id="@+id/min_recursion_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Min"/>
     <Button
+        android:id="@+id/less_recursion_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="-"/>
 
     <TextView
+        android:id="@+id/recursion_level_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="1"/>
 
     <Button
+        android:id="@+id/more_recursion_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="+"/>
     <Button
+        android:id="@+id/max_recursion_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="max"/>
@@ -37,6 +43,6 @@
         android:id="@+id/item_location_recycler"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:listitem="@layout/item_content_element"/>
+        tools:listitem="@layout/item_name_element"/>
 
 </LinearLayout>

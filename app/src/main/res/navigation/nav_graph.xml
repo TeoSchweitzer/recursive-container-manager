@@ -14,10 +14,12 @@
             app:destination="@id/mainMenuFragment" />
     </fragment>
 
+
     <fragment
         android:id="@+id/mainMenuFragment"
         android:name="com.example.recursivecontainermanager.fragments.MainMenuFragment"
-        android:label="Main Menu">
+        android:label="Menu">
+
         <action
             android:id="@+id/action_mainMenuFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
