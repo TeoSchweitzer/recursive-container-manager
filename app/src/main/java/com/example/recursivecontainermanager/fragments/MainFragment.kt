@@ -69,7 +69,7 @@ class MainFragment: Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.show_menu_button -> {
-                MainMenuFragment().show(parentFragmentManager, tag)
+                MainMenuFragment().show(parentFragmentManager, null)
                 return true
             }
             R.id.refresh_button -> {

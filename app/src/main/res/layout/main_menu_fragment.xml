@@ -1,36 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-
-    <Button
-        android:id="@+id/sign_in_button"
+    <EditText
+        android:id="@+id/username_field"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign In" />
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Username"
+        android:visibility="gone"/>
 
-    <Button
-        android:id="@+id/sign_up_button"
+    <EditText
+        android:id="@+id/password_field"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign Up" />
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:visibility="gone"/>
 
-    <Button
-        android:id="@+id/delete_account_button"
+    <EditText
+        android:id="@+id/password_repeat_field"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Delete Account"
-        android:visibility="gone" />
-
-    <Button
-        android:id="@+id/sign_out_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sign Out"
-        android:visibility="gone" />
-
+        android:ems="10"
+        android:hint="Repeat"
+        android:inputType="textPassword"
+        android:visibility="gone"/>
 
     <EditText
         android:id="@+id/server_address_field"
@@ -39,6 +40,79 @@
         android:ems="10"
         android:hint="Server Address"
         android:inputType="textUri"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:visibility="gone"/>
 
+    <TextView
+        android:id="@+id/deletion_confirmation_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Are you sure you want to delete your account ?"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/sign_out_confirmation_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Are you sure you want to disconnect ?"
+        android:visibility="gone"/>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/show_sign_in_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="0.8"
+            android:scaleY="0.8"
+            android:text="Sign In"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/show_sign_up_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="0.8"
+            android:scaleY="0.8"
+            android:text="Sign Up"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/show_sign_in_button" />
+
+        <Button
+            android:id="@+id/show_delete_account_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="0.8"
+            android:scaleY="0.8"
+            android:text="Delete Account"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/show_sign_up_button" />
+
+        <Button
+            android:id="@+id/show_sign_out_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="0.8"
+            android:scaleY="0.8"
+            android:text="Sign Out"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/show_delete_account_button" />
+
+        <Button
+            android:id="@+id/show_address_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="0.8"
+            android:scaleY="0.8"
+            android:text="Server Address"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/show_sign_out_button" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
