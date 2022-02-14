@@ -41,6 +41,7 @@ class MainFragment: Fragment() {
         binding.mainRefresh.setOnRefreshListener { onRefresh() }
         binding.itemSearchField.setOnClickListener { searchItem() }
         binding.shade.setOnClickListener { cancelSearchFocus() }
+        binding.enterTokenButton.setOnClickListener { enterToken() }
     }
 
     private fun onRefresh(){
@@ -60,6 +61,10 @@ class MainFragment: Fragment() {
         binding.shade.minimumHeight = 0
         (requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
             .hideSoftInputFromWindow(requireView().windowToken, 0)
+    }
+
+    private fun enterToken() {
+        EnterTokenFragment().show(parentFragmentManager, null)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

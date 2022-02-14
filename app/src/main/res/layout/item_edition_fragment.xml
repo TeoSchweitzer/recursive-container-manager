@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Import Item"/>
+
+    <EditText
+        android:id="@+id/item_name_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Item Name"/>
+
+    <EditText
+        android:id="@+id/item_owners_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Item Owners"/>
+
+
+    <EditText
+        android:id="@+id/item_sub_owners_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Item Sub-Owners"/>
+
+    <EditText
+        android:id="@+id/item_read_only_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Item Read Only Users"/>
+
+    <EditText
+        android:id="@+id/item_tags_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Tags: tag1, tag2"/>
+
+    <EditText
+        android:id="@+id/item_position_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Item position. Ex: 'To the left'"/>
+
+</LinearLayout>
