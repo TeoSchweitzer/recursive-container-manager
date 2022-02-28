@@ -39,7 +39,7 @@ class CurrentItemFragment: Fragment() {
         AlertDialog.Builder(requireActivity())
                 //for QR or JSON: add qr code or JSON from model
                 //for tokens: add token settings option:.setMultiChoiceItems()
-                //for tokens: add a generate token button
+                //for tokens: also add a generate token button
             .setNeutralButton("Share", null)
             .create().show()
     }
