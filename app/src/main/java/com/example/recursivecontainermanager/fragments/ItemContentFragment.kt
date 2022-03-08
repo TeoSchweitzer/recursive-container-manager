@@ -7,23 +7,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recursivecontainermanager.databinding.ItemContentFragmentBinding
 
 class ItemContentFragment:  Fragment() {
     private var _binding: ItemContentFragmentBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater:LayoutInflater, container:ViewGroup?, bundle:Bundle?): View {
         _binding = ItemContentFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.nameTagFilterField.addTextChangedListener(textWatcher)
+        //viewModel.itemContentList.observe(requireActivity()) {
+        //    binding.itemContentRecycler.adapter = ItemListAdapter(it, ::viewModel.changeCurrentItem, false)
+        //}
     }
 
     private val textWatcher = object : TextWatcher {

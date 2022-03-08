@@ -15,6 +15,9 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.recursivecontainermanager.adapters.ItemListAdapter
+import com.example.recursivecontainermanager.data.entities.Item
 import com.example.recursivecontainermanager.databinding.SearchFragmentBinding
 
 
@@ -29,6 +32,9 @@ class SearchFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.nameSearchField.addTextChangedListener(nameSearchWatcher)
+        //viewModel.itemSearchList.observe(requireActivity()) {
+        //    binding.searchRecycler.adapter = ItemListAdapter(it, ::viewModel.changeCurrentItem, false)
+        //}
     }
 
     fun focusSearchBar() {

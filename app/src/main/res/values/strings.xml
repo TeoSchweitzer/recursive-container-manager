@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Recursive Container Manager</string>
+    <string name="default_position">in</string>
 </resources>
