@@ -11,6 +11,6 @@ data class Item(
     var owners: List<String>,
     var subOwners: List<String>?,
     var readonly: List<String>?,
-    var tags: List<String>,
+    var tags: List<String>?,
     var position: String? //position description in its container, defaults to "in"
 )
