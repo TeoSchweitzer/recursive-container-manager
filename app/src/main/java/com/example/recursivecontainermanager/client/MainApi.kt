@@ -1,54 +1,77 @@
 package com.example.recursivecontainermanager.client
 
-import com.example.recursivecontainermanager.data.entities.Item
-import com.example.recursivecontainermanager.data.entities.Token
-import com.example.recursivecontainermanager.data.entities.Tree
 import com.example.recursivecontainermanager.data.entities.UserCredentials
-import retrofit2.http.*
-
-interface MainApi {
-
-    //Manage users
-    @GET("login")
-    suspend fun authenticate(@Body credentials: UserCredentials)
-
-    @POST("user")
-    suspend fun createAccount(@Body credentials: UserCredentials)
-
-    @DELETE("user/{userUuid}")
-    suspend fun deleteAccount(@Path("userUuid") userUuid: String)
+import com.example.recursivecontainermanager.exceptions.ServerError.*
+import com.example.recursivecontainermanager.exceptions.ServerErrorException
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import okhttp3.OkHttpClient
+import okhttp3.Response
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 
 
-    //Manage Trees
-    @GET("find")
-    suspend fun findTree(@Query("item") item: String)
 
-    @GET("tree/{treeUuid}")
-    suspend fun getTree(
-        @Path("treeUuid") treeUuid: String,
-        @Header("If-None-Match") eTag: String
-    ): Tree
+/**
+ * The base URL will be added by the interceptor
+ */
+private const val BASE_URL = ""
 
+/**
+ * Build the Moshi object that Retrofit will be using, making sure to add the Kotlin adapter for
+ * full Kotlin compatibility.
+ */
+private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
 
-    //Manage Items
-    @POST("item")
-    suspend fun addItem(@Body item: Item, @Header("If-Match") eTag: String)
-
-    @PUT("item/{itemUuid}")
-    suspend fun alterItem(
-        @Path("itemUuid") itemUuid: String,
-        @Body item: Item,
-        @Header("If-Match") eTag: String
-    )
-
-    @DELETE("item/{itemUuid}")
-    suspend fun deleteItem(@Path("itemUuid") itemUuid: String, @Header("If-Match") eTag: String)
+/**
+ * Add Interceptor
+ */
+private val client = OkHttpClient().newBuilder().addInterceptor(SessionInterceptor()).build()
 
 
-    //Manage Tokens
-    @POST("token")
-    suspend fun createToken(@Body token: Token)
+/**
+ * Use the Retrofit builder to build a retrofit object using a Moshi converter with our Moshi
+ * object.
+ */
+private val retrofit = Retrofit.Builder()
+    .addConverterFactory(MoshiConverterFactory.create(moshi))
+    .baseUrl(BASE_URL)
+    .client(client)
+    .build()
 
-    @GET("token/{tokenCode}")
-    suspend fun getToken(@Path("tokenCode") tokenCode: String): Tree
+/**
+ * A public Api object that exposes the lazy-initialized Retrofit service
+ */
+object MainApi {
+
+    private val retrofitService: MainApiInterface by lazy { retrofit.create(MainApiInterface::class.java) }
+    private var serverAddress = "/"
+    private var sessionCookie = ""
+
+    fun getSessionCookie() = sessionCookie
+
+    fun getServerAddress() = serverAddress
+    fun setServerAddress(address: String) {
+        serverAddress = if (address.endsWith("/")) address else "$address/"
+    }
+
+    suspend fun authenticate(name: String, password: String): String {
+        val response = retrofitService.authenticate(UserCredentials(name, password))
+        if (!response.isRedirect) throw ServerErrorException(response.request.url, IMPOSSIBLE_STATUS_RESPONSE, response.code.toString())
+        setNewSession(response)
+        return response.headers["Location"]!!
+    }
+
+
+    private fun setNewSession(resp: Response) {
+        var session = ""
+        for (header in resp.headers){
+            if (header.first=="Set-Cookie" && header.second.startsWith("session=")) {
+                session = header.second.substringAfter("session=").split(';')[0]
+                break
+            }
+        }
+        if (session=="") throw ServerErrorException(resp.request.url, NO_SESSION_COOKIE, null)
+        sessionCookie = session
+    }
 }
