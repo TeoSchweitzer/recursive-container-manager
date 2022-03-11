@@ -6,28 +6,32 @@ import com.example.recursivecontainermanager.exceptions.ServerErrorException
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
-import okhttp3.Response
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-
+import java.util.concurrent.TimeUnit
 
 
 /**
  * The base URL will be added by the interceptor
  */
-private const val BASE_URL = ""
+const val BASE_URL = "http://127.0.0.1:8080"
+private const val REQUEST_TIMEOUT = 10L
 
 /**
  * Build the Moshi object that Retrofit will be using, making sure to add the Kotlin adapter for
  * full Kotlin compatibility.
  */
-private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+val moshi: Moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
 
 /**
- * Add Interceptor
+ * Add Interceptor and timeouts
  */
-private val client = OkHttpClient().newBuilder().addInterceptor(SessionInterceptor()).build()
-
+private val client = OkHttpClient.Builder()
+    .readTimeout(REQUEST_TIMEOUT, TimeUnit.SECONDS)
+    .connectTimeout(REQUEST_TIMEOUT, TimeUnit.SECONDS)
+    .addInterceptor(SessionInterceptor())
+    .build()
 
 /**
  * Use the Retrofit builder to build a retrofit object using a Moshi converter with our Moshi
@@ -44,8 +48,8 @@ private val retrofit = Retrofit.Builder()
  */
 object MainApi {
 
-    private val retrofitService: MainApiInterface by lazy { retrofit.create(MainApiInterface::class.java) }
-    private var serverAddress = "/"
+    val retrofitService: MainApiInterface by lazy { retrofit.create(MainApiInterface::class.java) }
+    private var serverAddress = "http://127.0.0.1:8080"
     private var sessionCookie = ""
 
     fun getSessionCookie() = sessionCookie
@@ -55,23 +59,28 @@ object MainApi {
         serverAddress = if (address.endsWith("/")) address else "$address/"
     }
 
+    /**
+     * Takes a name and password, returns the url of the corresponding user, setting a new session cookie on the way.
+     * Can throw ServerErrorException (server isn't working properly), and InvalidCredentialsException (name+password match nothing)
+     */
     suspend fun authenticate(name: String, password: String): String {
         val response = retrofitService.authenticate(UserCredentials(name, password))
-        if (!response.isRedirect) throw ServerErrorException(response.request.url, IMPOSSIBLE_STATUS_RESPONSE, response.code.toString())
-        setNewSession(response)
-        return response.headers["Location"]!!
+        if (response.code()!=302) throw ServerErrorException("/login", IMPOSSIBLE_STATUS_RESPONSE, response.code().toString())
+        setNewSession(response )
+        return response.headers()["Location"]!!
     }
 
 
-    private fun setNewSession(resp: Response) {
+
+    private fun setNewSession(resp: Response<Unit>) {
         var session = ""
-        for (header in resp.headers){
+        for (header in resp.headers()){
             if (header.first=="Set-Cookie" && header.second.startsWith("session=")) {
                 session = header.second.substringAfter("session=").split(';')[0]
                 break
             }
         }
-        if (session=="") throw ServerErrorException(resp.request.url, NO_SESSION_COOKIE, null)
+        if (session=="") throw ServerErrorException("/login", NO_SESSION_COOKIE, null)
         sessionCookie = session
     }
 }

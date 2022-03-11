@@ -16,8 +16,8 @@ import retrofit2.http.*
 interface MainApiInterface {
 
     //Manage users
-    @GET("login")
-    suspend fun authenticate(@Body credentials: UserCredentials): okhttp3.Response
+    @POST("login")
+    suspend fun authenticate(@Body credentials: UserCredentials): Response<Unit>
 
     @POST("user")
     suspend fun createAccount(@Body credentials: UserCredentials)

@@ -1,6 +1,6 @@
 package com.example.recursivecontainermanager.exceptions
 
-import java.lang.Exception
+import java.io.IOException
 
-class InvalidCredentialsException: Exception() {
+class InvalidCredentialsException: IOException() {
 }

@@ -13,7 +13,7 @@ class SessionInterceptor: Interceptor {
         /** Alter the request here */
 
         val sessionRequest = request.newBuilder()
-            .url(MainApi.getServerAddress()+request.url)
+            .url(MainApi.getServerAddress()+request.url.toString().substringAfter(BASE_URL))
             .header("Cookie", "session=${MainApi.getSessionCookie()}")
             .build()
 
@@ -24,7 +24,7 @@ class SessionInterceptor: Interceptor {
         if (response.code == 403)
             throw InvalidCredentialsException()
         if (response.isRedirect && response.headers["Location"] == null)
-            throw ServerErrorException(response.request.url, ServerError.MALFORMED_RESPONSE, response.headers.toString())
+            throw ServerErrorException(response.request.url.toString(), ServerError.MALFORMED_RESPONSE, response.headers.toString())
 
         /** Return response if no exception is to be thrown */
         return response
