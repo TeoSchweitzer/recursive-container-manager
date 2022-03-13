@@ -13,14 +13,13 @@
         android:id="@+id/name_tag_filter_field"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="64dp"
         android:background="@drawable/customtextborder"
         android:hint="@string/tag_name_filter"
         android:minHeight="48dp"
         android:textColor="@color/yellow"
         android:textColorHint="@color/yellow"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,6 +50,9 @@
         android:layout_height="wrap_content"
         android:text="@string/_1"
         android:theme="@style/Button.cool"
+        android:visibility="visible"
+        android:textColor="@color/yellow"
+        android:textColorHint="@color/yellow"
         app:layout_constraintBottom_toTopOf="@+id/max_recursion_button"
         app:layout_constraintEnd_toStartOf="@+id/max_recursion_button"
         app:layout_constraintStart_toEndOf="@+id/min_recursion_button"
@@ -81,11 +83,23 @@
         android:id="@+id/item_content_recycler"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="32dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/min_recursion_button" />
+
+    <TextView
+        android:id="@+id/recursion_level_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/niveau_de_r_cursion"
+        android:textColor="@color/yellow"
+        android:textColorHint="@color/yellow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,15 +16,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <EditText
+            <Button
                 android:id="@+id/item_search_field"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:focusable="false"
-                android:hint="@string/search_item"
-                android:inputType="textUri"
-                android:textColorHint="@color/yellow"
+                android:hint="@string/search_item_caps"
+                android:theme="@style/Button.cool"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -78,11 +80,8 @@
                 android:name="com.example.recursivecontainermanager.fragments.LocationChainFragment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="1dp"
                 android:layout_marginTop="1dp"
-                android:layout_marginEnd="1dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/current_item_fragment_view"
                 tools:layout="@layout/location_chain_fragment" />
