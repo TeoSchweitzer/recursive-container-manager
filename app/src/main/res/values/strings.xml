@@ -24,9 +24,11 @@
     <string name="delete_account">Delete Account</string>
     <string name="sign_out">Sign Out</string>
     <string name="search_item">Search Item</string>
+    <string name="search_item_caps">SEARCH ITEM</string>
     <string name="enter_access_code">Enter Access Code</string>
     <string name="tag_filter">Tag Filter</string>
     <string name="show_menu">Show Menu</string>
     <string name="refresh">Refresh</string>
     <string name="access_code">Access Code</string>
+    <string name="niveau_de_r_cursion">Level of Recursion</string>
 </resources>
