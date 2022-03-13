@@ -1,69 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="@drawable/customborder"
+    android:backgroundTint="@color/bleu_pomme"
+    android:layout_margin="1dp">
 
     <TextView
         android:id="@+id/item_name_text"
-        tools:text="Item Name"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/customtextborder"
+        android:textColor="@color/yellow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Item Name" />
+
 
     <TextView
         android:id="@+id/item_owner_text"
-        tools:text="Item Owner(s)"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/customtextborder"
+        android:textColor="@color/yellow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_name_text"
+        tools:text="Item Owner(s)" />
 
     <TextView
         android:id="@+id/item_tags_text"
-        tools:text="tag1, tag2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/customtextborder"
+        android:textColor="@color/yellow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_owner_text"
+        tools:text="tag1, tag2" />
 
     <TextView
         android:id="@+id/item_tokens_text"
-        tools:text="12345"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/customtextborder"
+        android:textColor="@color/yellow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_tags_text"
+        tools:text="12345"
+        tools:visibility="visible" />
 
     <Button
         android:id="@+id/add_item_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Item Inside" />
+        android:layout_marginTop="16dp"
+        android:text="@string/add_item_inside"
+        android:theme="@style/Button.cool"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_tokens_text" />
 
     <Button
         android:id="@+id/alter_item_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Alter Item" />
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/alter_item"
+        android:theme="@style/Button.cool"
+        app:layout_constraintEnd_toStartOf="@+id/delete_item_button"
+        app:layout_constraintHorizontal_bias="0.047"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/delete_item_button" />
 
     <Button
         android:id="@+id/delete_item_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Delete Item" />
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="64dp"
+        android:text="@string/delete_item"
+        android:theme="@style/Button.cool"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_item_button" />
 
     <Button
         android:id="@+id/json_sharing_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="JSON" />
+        android:layout_marginStart="16dp"
+        android:text="@string/json"
+        android:theme="@style/Button.cool"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/token_sharing_button" />
 
     <Button
         android:id="@+id/token_sharing_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Token Share" />
+        android:layout_marginTop="20dp"
+        android:text="@string/token_share"
+        android:theme="@style/Button.cool"
+        app:layout_constraintEnd_toStartOf="@+id/qrcode_sharing_button"
+        app:layout_constraintStart_toEndOf="@+id/json_sharing_button"
+        app:layout_constraintTop_toBottomOf="@+id/alter_item_button" />
 
     <Button
         android:id="@+id/qrcode_sharing_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="QR Code" />
+        android:layout_marginEnd="16dp"
+        android:text="@string/qr_code"
+        android:theme="@style/Button.cool"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/token_sharing_button" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

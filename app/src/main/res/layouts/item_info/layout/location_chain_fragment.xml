@@ -4,7 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@drawable/customborder"
+    android:backgroundTint="@color/bleu_pomme"
+    android:layout_margin="1dp"
+    android:layout_gravity="center_horizontal">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/item_location_recycler"

@@ -1,34 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout3"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:layout_centerHorizontal="true"
+    android:layout_gravity="center"
+    android:layout_margin="1dp"
+    android:layout_marginTop="16dp"
     android:alpha="1"
-    android:orientation="vertical">
+    android:background="@drawable/customborder"
+    android:backgroundTint="@color/bleu_pomme">
 
     <EditText
         android:id="@+id/name_search_field"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Search Item"
-        android:inputType="textPersonName" />
+        android:hint="@string/search_item"
+        android:inputType="textPersonName"
+        android:textColor="@color/yellow"
+        android:textColorHint="@color/yellow"
+        app:layout_constraintBottom_toTopOf="@+id/tag_filter_field"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <EditText
         android:id="@+id/tag_filter_field"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Tag Filter"
+        android:hint="@string/tag_filter"
         android:inputType="textPersonName"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:textColor="@color/yellow"
+        android:textColorHint="@color/yellow"
+        app:layout_constraintBottom_toTopOf="@+id/search_recycler"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name_search_field" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_recycler"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tag_filter_field" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

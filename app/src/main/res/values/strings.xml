@@ -1,4 +1,32 @@
 <resources>
     <string name="app_name">Recursive Container Manager</string>
     <string name="default_position">in</string>
+    <string name="add_item_inside">Add Item Inside</string>
+    <string name="alter_item">Alter Item</string>
+    <string name="delete_item">Delete Item</string>
+    <string name="json">JSON</string>
+    <string name="token_share">Token Share</string>
+    <string name="qr_code">QR Code</string>
+    <string name="tag_name_filter">Tag/Name Filter</string>
+    <string name="min">Min</string>
+    <string name="tiret">-</string>
+    <string name="_1">1</string>
+    <string name="plus">+</string>
+    <string name="max">max</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="repeat">Repeat</string>
+    <string name="server_address">Server Address</string>
+    <string name="are_you_sure_you_want_to_delete_your_account">Are you sure you want to delete your account ?</string>
+    <string name="are_you_sure_you_want_to_disconnect">Are you sure you want to disconnect ?</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="search_item">Search Item</string>
+    <string name="enter_access_code">Enter Access Code</string>
+    <string name="tag_filter">Tag Filter</string>
+    <string name="show_menu">Show Menu</string>
+    <string name="refresh">Refresh</string>
+    <string name="access_code">Access Code</string>
 </resources>

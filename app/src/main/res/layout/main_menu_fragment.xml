@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="Username"
+        android:hint="@string/username"
         android:visibility="gone"/>
 
     <EditText
@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Password"
+        android:hint="@string/password"
         android:inputType="textPassword"
         android:visibility="gone"/>
 
@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Repeat"
+        android:hint="@string/repeat"
         android:inputType="textPassword"
         android:visibility="gone"/>
 
@@ -38,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Server Address"
+        android:hint="@string/server_address"
         android:inputType="textUri"
         android:minHeight="48dp"
         android:visibility="gone"/>
@@ -47,14 +47,14 @@
         android:id="@+id/deletion_confirmation_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Are you sure you want to delete your account ?"
+        android:text="@string/are_you_sure_you_want_to_delete_your_account"
         android:visibility="gone"/>
 
     <TextView
         android:id="@+id/sign_out_confirmation_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Are you sure you want to disconnect ?"
+        android:text="@string/are_you_sure_you_want_to_disconnect"
         android:visibility="gone"/>
 
 
@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:scaleX="0.8"
             android:scaleY="0.8"
-            android:text="Sign In"
+            android:text="@string/sign_in"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:scaleX="0.8"
             android:scaleY="0.8"
-            android:text="Sign Up"
+            android:text="@string/sign_up"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/show_sign_in_button" />
 
@@ -88,7 +88,7 @@
             android:layout_height="wrap_content"
             android:scaleX="0.8"
             android:scaleY="0.8"
-            android:text="Delete Account"
+            android:text="@string/delete_account"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/show_sign_up_button" />
@@ -99,7 +99,7 @@
             android:layout_height="wrap_content"
             android:scaleX="0.8"
             android:scaleY="0.8"
-            android:text="Sign Out"
+            android:text="@string/sign_out"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/show_delete_account_button" />
@@ -110,7 +110,7 @@
             android:layout_height="wrap_content"
             android:scaleX="0.8"
             android:scaleY="0.8"
-            android:text="Server Address"
+            android:text="@string/server_address"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/show_sign_out_button" />
 

@@ -18,12 +18,13 @@
 
             <EditText
                 android:id="@+id/item_search_field"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:focusable="false"
-                android:hint="Search Item"
+                android:hint="@string/search_item"
                 android:inputType="textUri"
+                android:textColorHint="@color/yellow"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,7 +33,6 @@
                 android:name="com.example.recursivecontainermanager.fragments.SearchFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
                 android:elevation="100dp"
                 android:visibility="invisible"
                 app:layout_constraintStart_toStartOf="parent"
@@ -53,15 +53,22 @@
                 android:id="@+id/enter_token_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Enter Access Code"
+                android:layout_marginTop="8dp"
+                android:text="@string/enter_access_code"
+                android:theme="@style/Button.cool"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/item_search_field" />
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/current_item_fragment_view"
                 android:name="com.example.recursivecontainermanager.fragments.CurrentItemFragment"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="1dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/enter_token_button"
                 tools:layout="@layout/current_item_fragment" />
@@ -71,6 +78,11 @@
                 android:name="com.example.recursivecontainermanager.fragments.LocationChainFragment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="1dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/current_item_fragment_view"
                 tools:layout="@layout/location_chain_fragment" />
@@ -78,8 +90,12 @@
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/item_content_fragment_view"
                 android:name="com.example.recursivecontainermanager.fragments.ItemContentFragment"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="1dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/location_chain_fragment_view"
                 tools:layout="@layout/item_content_fragment" />
