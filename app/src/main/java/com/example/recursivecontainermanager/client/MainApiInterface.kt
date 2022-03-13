@@ -1,29 +1,22 @@
 package com.example.recursivecontainermanager.client
 
-import com.example.recursivecontainermanager.data.entities.Item
-import com.example.recursivecontainermanager.data.entities.Token
-import com.example.recursivecontainermanager.data.entities.Tree
-import com.example.recursivecontainermanager.data.entities.UserCredentials
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import okhttp3.OkHttpClient
-import retrofit2.Call
+import com.example.recursivecontainermanager.data.entities.*
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.*
 
 interface MainApiInterface {
 
     //Manage users
     @POST("login")
-    suspend fun authenticate(@Body credentials: UserCredentials): Response<Unit>
+    @FormUrlEncoded
+    suspend fun authenticate(@Field("username") username: String,
+                             @Field("password") password: String): Response<Unit>
 
     @POST("user")
-    suspend fun createAccount(@Body credentials: UserCredentials)
+    suspend fun createAccount(@Body credentials: User): Response<Unit>
 
-    @DELETE("user/{userUuid}")
-    suspend fun deleteAccount(@Path("userUuid") userUuid: String)
+    @DELETE("user/{username}")
+    suspend fun deleteAccount(@Path("username") username: String): Response<Unit>
 
 
     //Manage Trees

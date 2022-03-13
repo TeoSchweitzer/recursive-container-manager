@@ -8,5 +8,5 @@ enum class ServerError {
     MALFORMED_RESPONSE
 }
 
-class ServerErrorException(url: String, error: ServerError, message: String?) :
-    IOException("$url: $error"+(if (!message.isNullOrBlank()) ": $message" else ""))
+class ServerErrorException(error: ServerError, message: String?) :
+    IOException("$error"+(if (!message.isNullOrBlank()) ": $message" else ""))
