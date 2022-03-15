@@ -52,8 +52,7 @@ class ClientTest {
         val name = "name${Date().time}"
         runBlocking {
             try {
-                val result = MainApi.createAccount(name, "testpass")
-                assert(result.startsWith("/user/$name"))
+                MainApi.createAccount(name, "testpass")
                 MainApi.authenticate(name,"testpass")
                 MainApi.deleteAccount(name)
             }
@@ -70,8 +69,7 @@ class ClientTest {
         var correctCookie = ""
             runBlocking {
             try {
-                val result = MainApi.createAccount(name, "testpass")
-                assert(result.startsWith("/user/$name"))
+                MainApi.createAccount(name, "testpass")
                 MainApi.authenticate(name,"testpass")
                 correctCookie = MainApi.getSessionCookie()
                 MainApi.setSessionCookie("FAKEF079274877E24D6EC9C78CDEFAKE")
@@ -84,6 +82,24 @@ class ClientTest {
                 MainApi.setSessionCookie(correctCookie)
                 MainApi.deleteAccount(name)
             }
+        }
+    }
+
+    @Test
+    fun create_account_with_existing_username() {
+        val name = "name${Date().time}"
+        runBlocking {
+            try {
+                MainApi.createAccount(name, "testpass")
+                MainApi.createAccount(name, "testpass")
+                fail("Account shouldn't be created: username is used")
+            }
+            catch (e: UsernameExistsException) {
+                MainApi.authenticate(name,"testpass")
+                MainApi.deleteAccount(name)
+            }
+            catch (e: ServerErrorException) { fail("ServerErrorException: $e") }
+            catch (e: AccountDeletionFailedException) { fail("AccountDeletionFailedException: $e") }
         }
     }
 }

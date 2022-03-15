@@ -20,35 +20,35 @@ interface MainApiInterface {
 
 
     //Manage Trees
-    @GET("find")
-    suspend fun findTree(@Query("item") item: String)
+    //@GET("find")
+    //suspend fun findTree(@Query("item") item: String): Response<Unit>
 
-    @GET("tree/{treeUuid}")
-    suspend fun getTree(
-        @Path("treeUuid") treeUuid: String,
+    @GET("user/{username}")
+    suspend fun getUserItems(
+        @Path("username") username: String,
         @Header("If-None-Match") eTag: String
-    ): Tree
+    ): Response<Tree>
 
 
     //Manage Items
     @POST("item")
-    suspend fun addItem(@Body item: Item, @Header("If-Match") eTag: String)
+    suspend fun addItem(@Body item: Item, @Header("If-Match") eTag: String): Response<Unit>
 
     @PUT("item/{itemUuid}")
     suspend fun alterItem(
         @Path("itemUuid") itemUuid: String,
         @Body item: Item,
         @Header("If-Match") eTag: String
-    )
+    ): Response<Unit>
 
     @DELETE("item/{itemUuid}")
-    suspend fun deleteItem(@Path("itemUuid") itemUuid: String, @Header("If-Match") eTag: String)
+    suspend fun deleteItem(@Path("itemUuid") itemUuid: String, @Header("If-Match") eTag: String): Response<Unit>
 
 
     //Manage Tokens
     @POST("token")
-    suspend fun createToken(@Body token: Token)
+    suspend fun createToken(@Body token: Token): Response<Unit>
 
     @GET("token/{tokenCode}")
-    suspend fun getToken(@Path("tokenCode") tokenCode: String): Tree
+    suspend fun getToken(@Path("tokenCode") tokenCode: String): Response<Unit>
 }
