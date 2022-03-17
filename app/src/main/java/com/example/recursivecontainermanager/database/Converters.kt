@@ -1,6 +1,7 @@
 package com.example.recursivecontainermanager.database
 
 import android.content.Context
+import android.util.Log
 import androidx.room.Room
 import androidx.room.TypeConverter
 import androidx.test.core.app.ApplicationProvider
@@ -77,6 +78,7 @@ class Converters {
             context, DataBase::class.java).build()
         itemDAO = db.itemDao()!!
         itemDAO.addItem(item)
+        Log.i("test_item_add",item.id +" "+ item.owners[0])
         return item.id
     }
 
@@ -85,7 +87,10 @@ class Converters {
         db = Room.inMemoryDatabaseBuilder(
             context, DataBase::class.java).build()
         itemDAO = db.itemDao()!!
-        return itemDAO.getItem(string)
+        Log.i("test_item_get",string)
+        val item: Item = itemDAO.getItem(string) //TODO return null trouver pourquoi
+        Log.i("test_item_get",string + " - " + item)
+        return item
     }
 
     @TypeConverter
@@ -93,22 +98,15 @@ class Converters {
         db = Room.inMemoryDatabaseBuilder(
             context, DataBase::class.java).build()
         treeDAO = db.treeDao()!!
-        itemDAO = db.itemDao()!!
+        //itemDAO = db.itemDao()!!
         if(list == null) return null
-        var listTree: List<Tree> = list
-        var count: Int = 0
-        while(listTree.size > count){
-            for (tree in listTree[count].children!!){
-                listTree += tree
-            }
-            treeDAO.addTree(listTree[count])
-            itemDAO.addItem(listTree[count].item)
-            count += 1
-        }
         var value : String = ""
-        for(i in 0..list.size-2){
-            value += list[i].item.id + ","
+        for (tree in 0..list.size-2){
+            treeDAO.addTree(list[tree])
+            //itemDAO.addItem(list[tree].item)
+            value += list[tree].item.id + ","
         }
+        treeDAO.addTree(list[list.size-1])
         value += list[list.size-1].item.id
         return value
     }
@@ -117,19 +115,15 @@ class Converters {
     fun stringToListTree(string : String?): List<Tree>? {
         db = Room.inMemoryDatabaseBuilder(
             context, DataBase::class.java).build()
-        itemDAO = db.itemDao()!!
         treeDAO = db.treeDao()!!
         if(string == null) return null
-        val item: Item
         var tree: Tree
         val idItems : List<String>? = string.split(",")
         var listTree: List<Tree> = listOf()
         for (id in idItems!!){
-            tree = treeDAO.getTree(string)
+            tree = treeDAO.getTree(id)
             listTree += tree
         }
-        item = itemDAO.getItem(string)
-        tree = treeDAO.getTree(string)
-        return listOf(tree)
+        return listTree
     }
 }

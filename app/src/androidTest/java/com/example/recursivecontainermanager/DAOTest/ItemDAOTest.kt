@@ -41,14 +41,14 @@ class ItemDAOTest {
     @Throws(Exception::class)
     fun writeItemAndRead() {
         val token1: Token = Token(
-            "uuid",
-            "type",
+            "uuid1",
+            "type1",
             200
         )
         val token2: Token = Token(
-            "uuid",
-            "type",
-            200
+            "uuid2",
+            "type2",
+            300
         )
         val item: Item = Item(
             "uuid",
@@ -71,14 +71,14 @@ class ItemDAOTest {
     @Throws(Exception::class)
     fun writeItemAndAlter() {
         val token1: Token = Token(
-            "uuid",
-            "type",
+            "uuid1",
+            "type1",
             200
         )
         val token2: Token = Token(
-            "uuid",
-            "type",
-            200
+            "uuid2",
+            "type2",
+            300
         )
         val item: Item = Item(
             "uuid",
@@ -114,14 +114,14 @@ class ItemDAOTest {
     @Throws(Exception::class)
     fun writeItemAndRewrite() {
         val token1: Token = Token(
-            "uuid",
-            "type",
+            "uuid1",
+            "type1",
             200
         )
         val token2: Token = Token(
-            "uuid",
-            "type",
-            200
+            "uuid2",
+            "type2",
+            300
         )
         val item: Item = Item(
             "uuid",
@@ -157,14 +157,14 @@ class ItemDAOTest {
     @Throws(Exception::class)
     fun writeItemAndDelete() {
         val token1: Token = Token(
-            "uuid",
-            "type",
+            "uuid1",
+            "type1",
             200
         )
         val token2: Token = Token(
-            "uuid",
-            "type",
-            200
+            "uuid2",
+            "type2",
+            300
         )
         val item: Item = Item(
             "uuid",

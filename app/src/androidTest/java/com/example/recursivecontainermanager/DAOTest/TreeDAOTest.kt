@@ -40,14 +40,14 @@ class TreeDAOTest {
     @Throws(Exception::class)
     fun writeTreeZeroGenerationAndRead() {
         val token1: Token = Token(
-            "uuid",
-            "type",
+            "uuid1",
+            "type1",
             200
         )
         val token2: Token = Token(
-            "uuid",
-            "type",
-            200
+            "uuid2",
+            "type2",
+            300
         )
         val item: Item = Item(
             "uuid",
@@ -74,14 +74,14 @@ class TreeDAOTest {
     @Throws(Exception::class)
     fun writeTreeOneGenerationAndRead() {
         val token1: Token = Token(
-            "uuid",
-            "type",
+            "uuid1",
+            "type1",
             200
         )
         val token2: Token = Token(
-            "uuid",
-            "type",
-            200
+            "uuid2",
+            "type2",
+            300
         )
         val item1: Item = Item(
             "uuid1",
@@ -128,14 +128,14 @@ class TreeDAOTest {
     @Throws(Exception::class)
     fun writeTreeTwoGenerationAndRead() {
         val token1: Token = Token(
-            "uuid",
-            "type",
+            "uuid1",
+            "type1",
             200
         )
         val token2: Token = Token(
-            "uuid",
-            "type",
-            200
+            "uuid2",
+            "type2",
+            300
         )
         val item1: Item = Item(
             "uuid1",
