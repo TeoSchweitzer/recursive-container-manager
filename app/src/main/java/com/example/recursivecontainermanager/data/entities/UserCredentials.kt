@@ -1,6 +1,10 @@
 package com.example.recursivecontainermanager.data.entities
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
 data class UserCredentials(
-    val username: String,
+    @PrimaryKey val username: String,
     val password: String
 )
