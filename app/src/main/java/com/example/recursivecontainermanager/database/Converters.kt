@@ -6,6 +6,7 @@ import androidx.room.TypeConverter
 import androidx.test.core.app.ApplicationProvider
 import com.example.recursivecontainermanager.dao.DataBase
 import com.example.recursivecontainermanager.data.entities.Item
+import com.example.recursivecontainermanager.data.entities.Token
 import com.example.recursivecontainermanager.data.entities.Tree
 import com.example.recursivecontainermanager.database.dao.ItemDAO
 import com.example.recursivecontainermanager.database.dao.TokenDAO
@@ -21,7 +22,8 @@ class Converters {
     val context = ApplicationProvider.getApplicationContext<Context>()
 
     @TypeConverter
-    fun listToString(list : List<String>): String {
+    fun listToString(list : List<String>?): String? {
+        if(list == null) return null
         var value : String = ""
         for(i in 0..list.size-2){
             value += list[i] + ","
@@ -31,9 +33,42 @@ class Converters {
     }
 
     @TypeConverter
-    fun stringToList(string : String): List<String>? {
-        val value : List<String>? = string.split("\\s*,\\s*")
+    fun stringToList(string : String?): List<String>? {
+        if (string == null) return null
+        val value : List<String>? = string!!.split(",")
         return value
+    }
+
+    @TypeConverter
+    fun tokensToString(list : List<Token>?): String? {
+        if(list == null) return null
+        var value : String = ""
+        for(i in 0..list.size-2){
+            value += list[i].toAccess + "," +
+                    list[i].authorizationType + "," +
+                    list[i].end + ":"
+        }
+        value += list[list.size-1].toAccess + "," +
+                list[list.size-1].authorizationType + "," +
+                list[list.size-1].end
+        return value
+    }
+
+    @TypeConverter
+    fun stringToTokens(string : String?): List<Token>? {
+        if (string == null) return null
+        var listToken: List<Token> = listOf()
+        val value : List<String>? = string!!.split(":")
+        for (v in value!!){
+            val tokenvalue : List<String> = v!!.split(",")
+            val token: Token = Token(
+                tokenvalue[0],
+                tokenvalue[1],
+                tokenvalue[2].toLong()
+            )
+            listToken += token
+        }
+        return listToken
     }
 
     @TypeConverter
@@ -87,7 +122,7 @@ class Converters {
         if(string == null) return null
         val item: Item
         var tree: Tree
-        val idItems : List<String>? = string.split("\\s*,\\s*")
+        val idItems : List<String>? = string.split(",")
         var listTree: List<Tree> = listOf()
         for (id in idItems!!){
             tree = treeDAO.getTree(string)

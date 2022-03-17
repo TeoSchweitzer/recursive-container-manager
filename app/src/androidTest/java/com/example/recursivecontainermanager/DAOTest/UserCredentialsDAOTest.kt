@@ -17,7 +17,7 @@ import java.io.IOException
 
 
 @RunWith(AndroidJUnit4::class)
-class UserDAOTest {
+class UserCredentialsDAOTest {
     private lateinit var userCredentialsDAO: UserCredentialsDAO
     private lateinit var db: DataBase
 
