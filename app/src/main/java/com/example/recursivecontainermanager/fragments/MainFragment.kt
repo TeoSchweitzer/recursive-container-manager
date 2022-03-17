@@ -1,27 +1,23 @@
 package com.example.recursivecontainermanager.fragments
 
-import android.app.Dialog
 import android.content.Context
-import android.opengl.Visibility
 import android.os.Bundle
-import android.util.Log
-import android.util.TypedValue
 import android.view.*
-import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import androidx.appcompat.app.ActionBar
-import androidx.core.view.isVisible
-import androidx.fragment.app.*
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.example.recursivecontainermanager.R
 import com.example.recursivecontainermanager.databinding.MainFragmentBinding
+import com.example.recursivecontainermanager.viewmodel.LoadingStatus
+import com.example.recursivecontainermanager.viewmodel.MainViewModel
 
 
 class MainFragment: Fragment() {
     private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,11 +38,21 @@ class MainFragment: Fragment() {
         binding.itemSearchField.setOnClickListener { searchItem() }
         binding.shade.setOnClickListener { cancelSearchFocus() }
         binding.enterTokenButton.setOnClickListener { enterToken() }
+
+        viewModel.loadingStatus.observe(viewLifecycleOwner) {
+            if (it.equals(LoadingStatus.SUCCESS)) {
+                binding.mainRefresh.isRefreshing = false
+                Toast.makeText(context,"Refreshing done", Toast.LENGTH_SHORT).show()
+            }
+            if (it.equals(LoadingStatus.FAILURE))
+                Toast.makeText(context,"Refreshing Error", Toast.LENGTH_SHORT).show()
+            if (it.equals(LoadingStatus.LOADING))
+                Toast.makeText(context,"Refreshing in progress...", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun onRefresh(){
-        Toast.makeText(context,"Refreshing done", Toast.LENGTH_SHORT).show()
-        binding.mainRefresh.isRefreshing = false
+        viewModel.fetchItems()
     }
 
     private fun searchItem(){
