@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Token(
-    @PrimaryKey val toAccess: String,
+    @PrimaryKey val tokenCode: String,
     val authorizationType: String,
     val end: Long
 )

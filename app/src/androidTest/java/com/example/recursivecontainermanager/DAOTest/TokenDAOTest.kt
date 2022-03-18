@@ -45,7 +45,7 @@ class TokenDAOTest {
             200
         )
         tokenDAO.addToken(token)
-        val tokenRead = tokenDAO.getToken(token.toAccess)
+        val tokenRead = tokenDAO.getToken(token.tokenCode)
         assertThat(token, equalTo(tokenRead))
     }
 
@@ -64,7 +64,7 @@ class TokenDAOTest {
         )
         tokenDAO.addToken(token)
         tokenDAO.alterToken(newtoken)
-        val tokenRead = tokenDAO.getToken(token.toAccess)
+        val tokenRead = tokenDAO.getToken(token.tokenCode)
         assertThat(newtoken, equalTo(tokenRead))
     }
 
@@ -83,7 +83,7 @@ class TokenDAOTest {
         )
         tokenDAO.addToken(token)
         tokenDAO.addToken(newtoken)
-        val tokenRead = tokenDAO.getToken(token.toAccess)
+        val tokenRead = tokenDAO.getToken(token.tokenCode)
         assertThat(newtoken, equalTo(tokenRead))
     }
 
@@ -97,7 +97,7 @@ class TokenDAOTest {
         )
         tokenDAO.addToken(token)
         tokenDAO.deleteToken(token)
-        val tokenRead = tokenDAO.getToken(token.toAccess)
+        val tokenRead = tokenDAO.getToken(token.tokenCode)
         assertThat(null, equalTo(tokenRead))
     }
 }

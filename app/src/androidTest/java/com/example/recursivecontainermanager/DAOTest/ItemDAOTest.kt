@@ -53,7 +53,6 @@ class ItemDAOTest {
         val item: Item = Item(
             "uuid",
             "name",
-            "location",
             "container",
             arrayListOf("owner1", "owner2"),
             arrayListOf("subowner1", "subowner2"),
@@ -83,7 +82,6 @@ class ItemDAOTest {
         val item: Item = Item(
             "uuid",
             "name",
-            "location",
             "container",
             arrayListOf("owner1", "owner2"),
             arrayListOf("subowner1", "subowner2"),
@@ -95,7 +93,6 @@ class ItemDAOTest {
         val newitem: Item = Item(
             "uuid",
             "name2",
-            "location2",
             "container2",
             arrayListOf("owner3", "owner4"),
             arrayListOf("subowner3", "subowner4"),
@@ -126,7 +123,6 @@ class ItemDAOTest {
         val item: Item = Item(
             "uuid",
             "name",
-            "location",
             "container",
             arrayListOf("owner1", "owner2"),
             arrayListOf("subowner1", "subowner2"),
@@ -138,7 +134,6 @@ class ItemDAOTest {
         val newitem: Item = Item(
             "uuid",
             "name2",
-            "location2",
             "container2",
             arrayListOf("owner3", "owner4"),
             arrayListOf("subowner3", "subowner4"),
@@ -169,7 +164,6 @@ class ItemDAOTest {
         val item: Item = Item(
             "uuid",
             "name",
-            "location",
             "container",
             arrayListOf("owner1", "owner2"),
             arrayListOf("subowner1", "subowner2"),

@@ -8,7 +8,7 @@ interface TokenDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addToken(token: Token)
 
-    @Query("SELECT * FROM Token WHERE toAccess IN (:access)")
+    @Query("SELECT * FROM Token WHERE tokenCode IN (:access)")
     fun getToken(access: String): Token
 
     @Update
