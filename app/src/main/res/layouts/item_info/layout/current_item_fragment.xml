@@ -29,8 +29,8 @@
 
     <ImageButton
         android:id="@+id/delete_item_button"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/round_button_shape"
         android:contentDescription="@string/delete_item"
@@ -43,8 +43,8 @@
 
     <ImageButton
         android:id="@+id/qrcode_sharing_button"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/round_button_shape"
         android:contentDescription="@string/qr_code"
@@ -56,8 +56,8 @@
 
     <ImageButton
         android:id="@+id/json_sharing_button"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/round_button_shape"
@@ -106,8 +106,8 @@
 
     <ImageButton
         android:id="@+id/alter_item_button"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/round_button_shape"
         android:contentDescription="@string/alter_item"
@@ -120,8 +120,8 @@
 
     <ImageButton
         android:id="@+id/token_sharing_button"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/round_button_shape"
         android:contentDescription="@string/token_share"
@@ -134,8 +134,8 @@
 
     <ImageButton
         android:id="@+id/add_item_button"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/round_button_shape"
         android:contentDescription="@string/add_item_inside"
