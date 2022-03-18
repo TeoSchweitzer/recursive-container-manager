@@ -52,7 +52,6 @@ class TreeDAOTest {
         val item: Item = Item(
             "uuid",
             "name",
-            "location",
             "container",
             arrayListOf("owner1", "owner2"),
             arrayListOf("subowner1", "subowner2"),
@@ -86,7 +85,6 @@ class TreeDAOTest {
         val item1: Item = Item(
             "uuid1",
             "name1",
-            "location1",
             "container1",
             arrayListOf("owner1", "owner2"),
             arrayListOf("subowner1", "subowner2"),
@@ -98,7 +96,6 @@ class TreeDAOTest {
         val item2: Item = Item(
             "uuid2",
             "name2",
-            "location2",
             "container2",
             arrayListOf("owner3", "owner4"),
             arrayListOf("subowner3", "subowner4"),
@@ -140,7 +137,6 @@ class TreeDAOTest {
         val item1: Item = Item(
             "uuid1",
             "name1",
-            "location1",
             "container1",
             arrayListOf("owner1", "owner2"),
             arrayListOf("subowner1", "subowner2"),
@@ -152,7 +148,6 @@ class TreeDAOTest {
         val item2: Item = Item(
             "uuid2",
             "name2",
-            "location2",
             "container2",
             arrayListOf("owner3", "owner4"),
             arrayListOf("subowner3", "subowner4"),

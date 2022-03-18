@@ -72,13 +72,12 @@ object MainApi {
      * Takes a name and password, returns the url of the corresponding user, setting a new session cookie on the way.
      * Can throw ServerErrorException (server isn't working properly), and InvalidCredentialsException (name+password match nothing)
      */
-    suspend fun authenticate(name: String, password: String): String {
+    suspend fun authenticate(name: String, password: String) {
         sessionCookie = ""
         val response = retrofitService.authenticate(name,password)
         if (response.code()!=302) throw ServerErrorException(IMPOSSIBLE_STATUS_RESPONSE, response.code().toString())
         if (response.headers()["Location"]!!.endsWith(LOGIN_ERROR_PATH)) throw InvalidCredentialsException()
         setNewSession(response)
-        return response.headers()["Location"]!!
     }
 
     suspend fun createAccount(name: String, password: String) {

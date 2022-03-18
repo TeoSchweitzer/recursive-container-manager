@@ -7,8 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.recursivecontainermanager.adapters.ItemListAdapter
 import com.example.recursivecontainermanager.databinding.ItemContentFragmentBinding
+import com.example.recursivecontainermanager.viewmodel.MainViewModel
 
 class ItemContentFragment:  Fragment() {
     private var _binding: ItemContentFragmentBinding? = null
@@ -19,11 +22,13 @@ class ItemContentFragment:  Fragment() {
         return binding.root
     }
 
+    private val viewModel: MainViewModel by activityViewModels()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.nameTagFilterField.addTextChangedListener(textWatcher)
-        //viewModel.itemContentList.observe(requireActivity()) {
-        //    binding.itemContentRecycler.adapter = ItemListAdapter(it, ::viewModel.changeCurrentItem, false)
-        //}
+        viewModel.itemContent.observe(requireActivity()) { list ->
+            binding.itemContentRecycler.adapter = ItemListAdapter(list, {viewModel.changeCurrentItem(it)}, false)
+        }
     }
 
     private val textWatcher = object : TextWatcher {

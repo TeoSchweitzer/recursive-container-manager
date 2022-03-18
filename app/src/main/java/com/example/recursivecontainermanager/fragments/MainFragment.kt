@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.recursivecontainermanager.R
 import com.example.recursivecontainermanager.databinding.MainFragmentBinding
-import com.example.recursivecontainermanager.viewmodel.LoadingStatus
 import com.example.recursivecontainermanager.viewmodel.MainViewModel
 
 
@@ -38,16 +37,17 @@ class MainFragment: Fragment() {
         binding.itemSearchField.setOnClickListener { searchItem() }
         binding.shade.setOnClickListener { cancelSearchFocus() }
         binding.enterTokenButton.setOnClickListener { enterToken() }
-
         viewModel.loadingStatus.observe(viewLifecycleOwner) {
-            if (it.equals(LoadingStatus.SUCCESS)) {
-                binding.mainRefresh.isRefreshing = false
-                Toast.makeText(context,"Refreshing done", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, getString(it), Toast.LENGTH_SHORT).show()
+            if (it == R.string.authenticate_user_not_found || it == R.string.create_account_done) {
+                val frag = MainMenuFragment()
+                frag.show(parentFragmentManager, null)
+                frag.chooseTab(1)
+            } else if (it == R.string.create_account_name_taken) {
+                val frag = MainMenuFragment()
+                frag.show(parentFragmentManager, null)
+                frag.chooseTab(2)
             }
-            if (it.equals(LoadingStatus.FAILURE))
-                Toast.makeText(context,"Refreshing Error", Toast.LENGTH_SHORT).show()
-            if (it.equals(LoadingStatus.LOADING))
-                Toast.makeText(context,"Refreshing in progress...", Toast.LENGTH_SHORT).show()
         }
     }
 

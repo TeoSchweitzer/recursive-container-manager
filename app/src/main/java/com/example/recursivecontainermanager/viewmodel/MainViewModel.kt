@@ -1,27 +1,25 @@
 package com.example.recursivecontainermanager.viewmodel
 
 import androidx.lifecycle.*
+import com.example.recursivecontainermanager.R
 import com.example.recursivecontainermanager.client.MainApi
 import com.example.recursivecontainermanager.data.entities.Item
 import com.example.recursivecontainermanager.data.entities.Tree
+import com.example.recursivecontainermanager.exceptions.InvalidCredentialsException
+import com.example.recursivecontainermanager.exceptions.ServerErrorException
+import com.example.recursivecontainermanager.exceptions.UsernameExistsException
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import java.io.IOException
 
-enum class LoadingStatus {
-    LOADING,
-    SUCCESS,
-    FAILURE
-}
-
-class MainViewModel: ViewModel() {
+class MainViewModel: ViewModelUtils() {
 
     private var itemTree: Tree? = null
 
-    private var username: String? = null
+    private var currentUser: String? = null
 
-    private val _loadingStatus = MutableLiveData<LoadingStatus>()
-    val loadingStatus: LiveData<LoadingStatus> = _loadingStatus
+    private val _loadingStatus = MutableLiveData<Int>()
+    val loadingStatus: LiveData<Int> = _loadingStatus
 
     private val _currentItem = MutableLiveData<Item>()
     val currentItem: LiveData<Item> = _currentItem
@@ -39,26 +37,34 @@ class MainViewModel: ViewModel() {
     val itemSearch: LiveData<List<Item>> = _itemSearch
 
     fun fetchItems() {
-        if (username==null) {
-            _loadingStatus.value = LoadingStatus.SUCCESS
+        if (currentUser==null) {
+            _loadingStatus.value = R.string.refresh_done
             return
         }
         viewModelScope.launch {
-            _loadingStatus.value = LoadingStatus.LOADING
+            _loadingStatus.value = R.string.refresh_loading
             var tree: Tree? = null
             try {
-                tree = MainApi.getUserItems(username!!)
+                tree = MainApi.getUserItems(currentUser!!)
+            } catch (e: ServerErrorException) {
+                _loadingStatus.value = R.string.server_error
+                viewModelScope.cancel()
             } catch (e: IOException) {
-                _loadingStatus.value = LoadingStatus.FAILURE
+                _loadingStatus.value = R.string.unknown_error
                 viewModelScope.cancel()
             }
             if (tree == null) viewModelScope.cancel()
             itemTree = tree
             if (currentItem.value == null) _currentItem.value = tree!!.item
             else _currentItem.value = getSubTree(currentItem.value!!.id, tree!!)?.item?: tree.item
-            _loadingStatus.value = LoadingStatus.SUCCESS
+            _loadingStatus.value = R.string.refresh_done
             updateState()
         }
+    }
+
+    fun changeCurrentItem(item: Item) {
+        _currentItem.value = item
+        updateState()
     }
 
     private fun updateState() {
@@ -68,54 +74,47 @@ class MainViewModel: ViewModel() {
         _itemSearch.value = listOf()
     }
 
-    private fun getSubTree(itemId: String, tree: Tree): Tree? {
-        if (itemId == tree.item.id) return tree
-        if (tree.children == null) return null
-        for (child in tree.children) {
-            val childResult = getSubTree(itemId, child)
-            if (childResult != null) return childResult
-        }
-        return null
-    }
-
-    private fun getItemContent(filters: List<String>, depth: Int, tree: Tree): List<Item> {
-        val collection = mutableListOf<Item>()
-        if (depth == 0 || tree.children == null) return collection
-        for (child in tree.children) {
-            if (passesTagFilter(filters, child.item)) {
-                collection.add(child.item)
-            }
-            if (depth > 0) collection.addAll(getItemContent(filters, depth-1, child))
-            else collection.addAll(getItemContent(filters, depth, child))
-        }
-        return collection
-    }
-
-    fun passesNameFilter(nameFilter: String, item: Item): Boolean {
-        return (nameFilter == "") || item.name.lowercase().contains(nameFilter.lowercase())
-    }
-
-    fun passesTagFilter(tagFilters: List<String>, item: Item): Boolean {
-        for (tagFilter in tagFilters) {
-            if (tagFilter == "") continue
-            var tagFound = false
-            for (tag in item.tags?:listOf()) {
-                if (tag.lowercase().contains(tagFilter.lowercase()) && tagFilter.startsWith('!')) return false
-                if (tag.lowercase().contains(tagFilter.lowercase())) tagFound = true
-            }
-            if (!tagFound) return false
-        }
+    fun newServerAddress(address: String): Boolean {
+        if (address.isBlank()) return false
+        MainApi.setServerAddress(address)
         return true
     }
 
-    private fun getItemLocation(item: Item, tree: Tree, location: MutableList<Item>): List<Item> {
-        location.add(tree.item)
-        if (item.id == tree.item.id) return location.reversed()
-        if (tree.children == null) return mutableListOf()
-        for (child in tree.children) {
-            val childResult = getItemLocation(item, child, location)
-            if (childResult.isNotEmpty()) return childResult
+    fun createAccount(username: String, password: String) {
+        _loadingStatus.value = R.string.create_account_start
+        viewModelScope.launch {
+            try {
+                MainApi.createAccount(username, password)
+            } catch (e: UsernameExistsException) {
+                _loadingStatus.value = R.string.create_account_name_taken
+            } catch (e: Exception) {
+                _loadingStatus.value = R.string.unknown_error
+            }
+            _loadingStatus.value = R.string.create_account_done
         }
-        return mutableListOf()
+    }
+
+    fun authenticate(username: String, password: String) {
+        _loadingStatus.value = R.string.authenticate_start
+        viewModelScope.launch {
+            try {
+                MainApi.authenticate(username, password)
+                currentUser = username
+                _loadingStatus.value = R.string.authenticate_done
+            } catch (e: InvalidCredentialsException) {
+                _loadingStatus.value = R.string.authenticate_user_not_found
+            } catch (e: Exception) {
+                _loadingStatus.value = R.string.unknown_error
+            }
+        }
+    }
+
+    fun newSearchFilter(nameFilter: String, tagFilter: String) {
+        if (itemTree == null) return
+        _itemSearch.value = searchItems(
+            nameFilter,
+            tagFilter.replace("", "").split(','),
+            itemTree!!
+        )
     }
 }

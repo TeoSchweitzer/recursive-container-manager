@@ -10,11 +10,7 @@ import com.example.recursivecontainermanager.data.entities.Item
 import com.example.recursivecontainermanager.data.entities.Token
 import com.example.recursivecontainermanager.data.entities.Tree
 import com.example.recursivecontainermanager.database.dao.ItemDAO
-import com.example.recursivecontainermanager.database.dao.TokenDAO
 import com.example.recursivecontainermanager.database.dao.TreeDAO
-import com.example.recursivecontainermanager.database.dao.UserCredentialsDAO
-import java.util.*
-import java.util.Arrays.asList
 
 class Converters {
     private lateinit var itemDAO: ItemDAO
@@ -45,11 +41,11 @@ class Converters {
         if(list == null) return null
         var value : String = ""
         for(i in 0..list.size-2){
-            value += list[i].toAccess + "," +
+            value += list[i].tokenCode + "," +
                     list[i].authorizationType + "," +
                     list[i].end + ":"
         }
-        value += list[list.size-1].toAccess + "," +
+        value += list[list.size-1].tokenCode + "," +
                 list[list.size-1].authorizationType + "," +
                 list[list.size-1].end
         return value
