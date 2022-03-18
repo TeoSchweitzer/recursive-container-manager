@@ -23,6 +23,7 @@
         android:shadowRadius="1"
         android:textColor="@color/yellow"
         android:text="@string/item_name"
+        android:maxWidth="170dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/current_item_title"
         tools:text="Item Name" />
@@ -82,6 +83,7 @@
         android:shadowRadius="1"
         android:textColor="@color/yellow"
         android:text="@string/token"
+        android:maxWidth="170dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/item_tags_text"
         tools:text="12345"
@@ -100,6 +102,7 @@
         android:shadowRadius="1"
         android:textColor="@color/yellow"
         android:text="@string/item_owner_s"
+        android:maxWidth="170dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/item_name_text"
         tools:text="Item Owner(s)" />
@@ -158,9 +161,10 @@
         android:shadowRadius="1"
         android:textColor="@color/yellow"
         android:text="@string/tags"
+        android:maxWidth="170dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/item_owner_text"
-        tools:text="tag1, tag2" />
+        tools:text="tag1, tag2, tag3, tag4, tag5, tag6" />
 
     <TextView
         android:id="@+id/current_item_title"
