@@ -5,129 +5,178 @@
     android:id="@+id/linearLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="1dp"
     android:background="@drawable/customborder"
-    android:backgroundTint="@color/bleu_pomme"
-    android:layout_margin="1dp">
+    android:backgroundTint="@color/bleu_pomme">
+
 
     <TextView
         android:id="@+id/item_name_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/customtextborder"
+        android:shadowColor="@color/violet"
+        android:shadowDx="-2"
+        android:shadowDy="-2"
+        android:shadowRadius="1"
         android:textColor="@color/yellow"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        android:text="@string/item_name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/current_item_title"
         tools:text="Item Name" />
 
-
-    <TextView
-        android:id="@+id/item_owner_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageButton
+        android:id="@+id/delete_item_button"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/customtextborder"
-        android:textColor="@color/yellow"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/item_name_text"
-        tools:text="Item Owner(s)" />
+        android:background="@drawable/round_button_shape"
+        android:contentDescription="@string/delete_item"
+        android:padding="4dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/delete_image"
+        android:theme="@style/Button.cool"
+        app:layout_constraintEnd_toEndOf="@+id/qrcode_sharing_button"
+        app:layout_constraintTop_toBottomOf="@+id/qrcode_sharing_button" />
 
-    <TextView
-        android:id="@+id/item_tags_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/customtextborder"
-        android:textColor="@color/yellow"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/item_owner_text"
-        tools:text="tag1, tag2" />
+    <ImageButton
+        android:id="@+id/qrcode_sharing_button"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/round_button_shape"
+        android:contentDescription="@string/qr_code"
+        android:padding="4dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/qrcode_image"
+        app:layout_constraintBottom_toBottomOf="@+id/token_sharing_button"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageButton
+        android:id="@+id/json_sharing_button"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/round_button_shape"
+        android:contentDescription="@string/json"
+        android:padding="4dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/json_image"
+        android:theme="@style/Button.cool"
+        app:layout_constraintEnd_toStartOf="@+id/token_sharing_button"
+        app:layout_constraintTop_toBottomOf="@+id/current_item_title" />
 
     <TextView
         android:id="@+id/item_tokens_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/customtextborder"
+        android:shadowColor="@color/violet"
+        android:shadowDx="-2"
+        android:shadowDy="-2"
+        android:shadowRadius="1"
         android:textColor="@color/yellow"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        android:text="@string/token"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/item_tags_text"
         tools:text="12345"
         tools:visibility="visible" />
 
-    <Button
-        android:id="@+id/add_item_button"
+    <TextView
+        android:id="@+id/item_owner_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="@string/add_item_inside"
-        android:theme="@style/Button.cool"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        android:background="@drawable/customtextborder"
+        android:shadowColor="@color/violet"
+        android:shadowDx="-2"
+        android:shadowDy="-2"
+        android:shadowRadius="1"
+        android:textColor="@color/yellow"
+        android:text="@string/item_owner_s"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/item_tokens_text" />
+        app:layout_constraintTop_toBottomOf="@+id/item_name_text"
+        tools:text="Item Owner(s)" />
 
-    <Button
+    <ImageButton
         android:id="@+id/alter_item_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/alter_item"
+        android:background="@drawable/round_button_shape"
+        android:contentDescription="@string/alter_item"
+        android:padding="4dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/alter_item_image"
         android:theme="@style/Button.cool"
         app:layout_constraintEnd_toStartOf="@+id/delete_item_button"
-        app:layout_constraintHorizontal_bias="0.047"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/delete_item_button" />
 
-    <Button
-        android:id="@+id/delete_item_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="64dp"
-        android:text="@string/delete_item"
-        android:theme="@style/Button.cool"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_item_button" />
-
-    <Button
-        android:id="@+id/json_sharing_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="@string/json"
-        android:theme="@style/Button.cool"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/token_sharing_button" />
-
-    <Button
+    <ImageButton
         android:id="@+id/token_sharing_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/token_share"
-        android:theme="@style/Button.cool"
-        app:layout_constraintEnd_toStartOf="@+id/qrcode_sharing_button"
-        app:layout_constraintStart_toEndOf="@+id/json_sharing_button"
-        app:layout_constraintTop_toBottomOf="@+id/alter_item_button" />
-
-    <Button
-        android:id="@+id/qrcode_sharing_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/qr_code"
+        android:background="@drawable/round_button_shape"
+        android:contentDescription="@string/token_share"
+        android:padding="4dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/share_token_item_image"
         android:theme="@style/Button.cool"
+        app:layout_constraintBottom_toBottomOf="@+id/json_sharing_button"
+        app:layout_constraintEnd_toStartOf="@+id/qrcode_sharing_button" />
+
+    <ImageButton
+        android:id="@+id/add_item_button"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/round_button_shape"
+        android:contentDescription="@string/add_item_inside"
+        android:padding="4dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/add_item_image"
+        app:layout_constraintEnd_toStartOf="@+id/alter_item_button"
+        app:layout_constraintTop_toTopOf="@+id/alter_item_button" />
+
+    <TextView
+        android:id="@+id/item_tags_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/customtextborder"
+        android:shadowColor="@color/violet"
+        android:shadowDx="-2"
+        android:shadowDy="-2"
+        android:shadowRadius="1"
+        android:textColor="@color/yellow"
+        android:text="@string/tags"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_owner_text"
+        tools:text="tag1, tag2" />
+
+    <TextView
+        android:id="@+id/current_item_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/customtitleborder"
+        android:shadowColor="@color/violet"
+        android:shadowDx="-2"
+        android:shadowDy="-2"
+        android:shadowRadius="1"
+        android:text="@string/location_chain"
+        android:textAlignment="center"
+        android:textColor="@color/yellow"
+        android:textColorHint="@color/yellow"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/token_sharing_button" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

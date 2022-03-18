@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.ImageButton
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.example.recursivecontainermanager.databinding.CurrentItemFragmentBinding
@@ -31,11 +31,11 @@ class CurrentItemFragment: Fragment() {
         binding.alterItemButton.setOnClickListener { itemEdition(binding.alterItemButton) }
     }
 
-    private fun itemEdition(pressedEditionButton: Button) {
+    private fun itemEdition(pressedEditionButton: ImageButton) {
         ItemEditionFragment().show(parentFragmentManager, null)
     }
 
-    private fun showSharable(pressedSharingButton: Button) {
+    private fun showSharable(pressedSharingButton: ImageButton) {
         AlertDialog.Builder(requireActivity())
                 //for QR or JSON: add qr code or JSON from model
                 //for tokens: add token settings option:.setMultiChoiceItems()

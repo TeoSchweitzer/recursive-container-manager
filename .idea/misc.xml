@@ -32,14 +32,21 @@
         <entry key="..\:/Users/Taiga/StudioProjects/recursive-container-manager/app/src/main/res/drawable/buttonstyle.xml" value="0.1825" />
         <entry key="..\:/Users/Taiga/StudioProjects/recursive-container-manager/app/src/main/res/drawable/customborder.xml" value="0.2805" />
         <entry key="..\:/Users/Taiga/StudioProjects/recursive-container-manager/app/src/main/res/drawable/customtextborder.xml" value="0.1825" />
+        <entry key="..\:/Users/Taiga/StudioProjects/recursive-container-manager/app/src/main/res/drawable/customtitleborder.xml" value="0.352" />
+        <entry key="..\:/Users/Taiga/StudioProjects/recursive-container-manager/app/src/main/res/drawable/edittextborder.xml" value="0.5105" />
+        <entry key="..\:/Users/Taiga/StudioProjects/recursive-container-manager/app/src/main/res/drawable/list_view_item_name.xml" value="0.352" />
+        <entry key="..\:/Users/Taiga/StudioProjects/recursive-container-manager/app/src/main/res/drawable/list_view_item_postion.xml" value="0.5105" />
+        <entry key="..\:/Users/Taiga/StudioProjects/recursive-container-manager/app/src/main/res/drawable/round_button_shape.xml" value="0.5105" />
         <entry key="..\:/Users/Taiga/StudioProjects/recursive-container-manager/app/src/main/res/layout/activity_main.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Taiga/StudioProjects/recursive-container-manager/app/src/main/res/layout/enter_token_fragment.xml" value="0.32653985507246375" />
         <entry key="..\:/Users/Taiga/StudioProjects/recursive-container-manager/app/src/main/res/layout/item_edition_fragment.xml" value="0.32653985507246375" />
         <entry key="..\:/Users/Taiga/StudioProjects/recursive-container-manager/app/src/main/res/layout/main_menu_fragment.xml" value="0.32653985507246375" />
+        <entry key="..\:/Users/Taiga/StudioProjects/recursive-container-manager/app/src/main/res/layout/tab_fragment.xml" value="0.32653985507246375" />
         <entry key="..\:/Users/Taiga/StudioProjects/recursive-container-manager/app/src/main/res/layouts/item_info/layout/current_item_fragment.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Taiga/StudioProjects/recursive-container-manager/app/src/main/res/layouts/item_info/layout/item_content_fragment.xml" value="0.32653985507246375" />
         <entry key="..\:/Users/Taiga/StudioProjects/recursive-container-manager/app/src/main/res/layouts/item_info/layout/item_in_list_view.xml" value="0.32653985507246375" />
         <entry key="..\:/Users/Taiga/StudioProjects/recursive-container-manager/app/src/main/res/layouts/item_info/layout/location_chain_fragment.xml" value="0.32653985507246375" />
+        <entry key="..\:/Users/Taiga/StudioProjects/recursive-container-manager/app/src/main/res/layouts/top_fragments/drawable-anydpi-v24/json_image.xml" value="0.5105" />
         <entry key="..\:/Users/Taiga/StudioProjects/recursive-container-manager/app/src/main/res/layouts/top_fragments/layout/main_fragment.xml" value="0.26704545454545453" />
         <entry key="..\:/Users/Taiga/StudioProjects/recursive-container-manager/app/src/main/res/layouts/top_fragments/layout/search_fragment.xml" value="0.33" />
         <entry key="..\:/Users/Taiga/StudioProjects/recursive-container-manager/app/src/main/res/menu/layout_menu.xml" value="0.5541666666666667" />

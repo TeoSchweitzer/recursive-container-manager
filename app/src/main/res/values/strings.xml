@@ -31,4 +31,11 @@
     <string name="refresh">Refresh</string>
     <string name="access_code">Access Code</string>
     <string name="niveau_de_r_cursion">Level of Recursion</string>
+    <string name="content">Content</string>
+    <string name="location_chain">Location Chain</string>
+    <string name="current_item">Current Item</string>
+    <string name="item_name">Item Name</string>
+    <string name="item_owner_s">Item Owner(s)</string>
+    <string name="tags">Tags</string>
+    <string name="token">Token</string>
 </resources>

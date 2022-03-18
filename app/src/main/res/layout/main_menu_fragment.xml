@@ -13,7 +13,11 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="@string/username"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:shadowColor="@color/violet"
+        android:shadowDx="-2"
+        android:shadowDy="-2"
+        android:shadowRadius="1"/>
 
     <EditText
         android:id="@+id/password_field"
@@ -22,7 +26,11 @@
         android:ems="10"
         android:hint="@string/password"
         android:inputType="textPassword"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:shadowColor="@color/violet"
+        android:shadowDx="-2"
+        android:shadowDy="-2"
+        android:shadowRadius="1"/>
 
     <EditText
         android:id="@+id/password_repeat_field"
@@ -31,7 +39,11 @@
         android:ems="10"
         android:hint="@string/repeat"
         android:inputType="textPassword"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:shadowColor="@color/violet"
+        android:shadowDx="-2"
+        android:shadowDy="-2"
+        android:shadowRadius="1"/>
 
     <EditText
         android:id="@+id/server_address_field"
@@ -41,21 +53,33 @@
         android:hint="@string/server_address"
         android:inputType="textUri"
         android:minHeight="48dp"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:shadowColor="@color/violet"
+        android:shadowDx="-2"
+        android:shadowDy="-2"
+        android:shadowRadius="1"/>
 
     <TextView
         android:id="@+id/deletion_confirmation_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/are_you_sure_you_want_to_delete_your_account"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:shadowColor="@color/violet"
+        android:shadowDx="-2"
+        android:shadowDy="-2"
+        android:shadowRadius="1"/>
 
     <TextView
         android:id="@+id/sign_out_confirmation_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/are_you_sure_you_want_to_disconnect"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:shadowColor="@color/violet"
+        android:shadowDx="-2"
+        android:shadowDy="-2"
+        android:shadowRadius="1"/>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -70,7 +94,11 @@
             android:scaleY="0.8"
             android:text="@string/sign_in"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            android:shadowColor="@color/violet"
+            android:shadowDx="-2"
+            android:shadowDy="-2"
+            android:shadowRadius="1" />
 
         <Button
             android:id="@+id/show_sign_up_button"
@@ -80,7 +108,11 @@
             android:scaleY="0.8"
             android:text="@string/sign_up"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/show_sign_in_button" />
+            app:layout_constraintStart_toEndOf="@+id/show_sign_in_button"
+            android:shadowColor="@color/violet"
+            android:shadowDx="-2"
+            android:shadowDy="-2"
+            android:shadowRadius="1"/>
 
         <Button
             android:id="@+id/show_delete_account_button"
@@ -91,7 +123,11 @@
             android:text="@string/delete_account"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/show_sign_up_button" />
+            app:layout_constraintStart_toEndOf="@+id/show_sign_up_button"
+            android:shadowColor="@color/violet"
+            android:shadowDx="-2"
+            android:shadowDy="-2"
+            android:shadowRadius="1"/>
 
         <Button
             android:id="@+id/show_sign_out_button"
@@ -102,7 +138,11 @@
             android:text="@string/sign_out"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/show_delete_account_button" />
+            app:layout_constraintStart_toEndOf="@+id/show_delete_account_button"
+            android:shadowColor="@color/violet"
+            android:shadowDx="-2"
+            android:shadowDy="-2"
+            android:shadowRadius="1"/>
 
         <Button
             android:id="@+id/show_address_button"
@@ -112,7 +152,11 @@
             android:scaleY="0.8"
             android:text="@string/server_address"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/show_sign_out_button" />
+            app:layout_constraintStart_toEndOf="@+id/show_sign_out_button"
+            android:shadowColor="@color/violet"
+            android:shadowDx="-2"
+            android:shadowDy="-2"
+            android:shadowRadius="1" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

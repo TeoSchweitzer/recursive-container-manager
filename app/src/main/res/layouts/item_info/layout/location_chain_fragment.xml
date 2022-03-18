@@ -1,20 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+    android:id="@+id/linearLayout5"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/customborder"
-    android:backgroundTint="@color/bleu_pomme"
+    android:layout_gravity="center_horizontal"
     android:layout_margin="1dp"
-    android:layout_gravity="center_horizontal">
+    android:background="@drawable/customborder"
+    android:backgroundTint="@color/bleu_pomme">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/item_location_recycler"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_in_list_view"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:listitem="@layout/item_in_list_view" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/title_location_chain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/customtitleborder"
+        android:text="@string/location_chain"
+        android:textColor="@color/yellow"
+        android:textColorHint="@color/yellow"
+        android:shadowColor="@color/violet"
+        android:shadowDx="-2"
+        android:shadowDy="-2"
+        android:shadowRadius="1"
+        app:layout_constraintBottom_toTopOf="@+id/item_location_recycler"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
