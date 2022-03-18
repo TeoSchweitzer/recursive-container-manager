@@ -20,7 +20,7 @@ class Converters {
     private lateinit var itemDAO: ItemDAO
     private lateinit var treeDAO: TreeDAO
     private lateinit var db: DataBase
-    val context = ApplicationProvider.getApplicationContext<Context>()
+
 
     @TypeConverter
     fun listToString(list : List<String>?): String? {
@@ -74,8 +74,8 @@ class Converters {
 
     @TypeConverter
     fun itemToString(item : Item): String {
-        db = Room.inMemoryDatabaseBuilder(
-            context, DataBase::class.java).build()
+        val context = ApplicationProvider.getApplicationContext<Context>()
+        db = DataBase.invoke(context)
         itemDAO = db.itemDao()!!
         itemDAO.addItem(item)
         Log.i("test_item_add",item.id +" "+ item.owners[0])
@@ -84,8 +84,8 @@ class Converters {
 
     @TypeConverter
     fun stringToItem(string : String): Item {
-        db = Room.inMemoryDatabaseBuilder(
-            context, DataBase::class.java).build()
+        val context = ApplicationProvider.getApplicationContext<Context>()
+        db = DataBase.invoke(context)
         itemDAO = db.itemDao()!!
         Log.i("test_item_get",string)
         val item: Item = itemDAO.getItem(string) //TODO return null trouver pourquoi
@@ -95,8 +95,8 @@ class Converters {
 
     @TypeConverter
     fun listTreeToString(list : List<Tree>?): String? {
-        db = Room.inMemoryDatabaseBuilder(
-            context, DataBase::class.java).build()
+        val context = ApplicationProvider.getApplicationContext<Context>()
+        db = DataBase.invoke(context)
         treeDAO = db.treeDao()!!
         //itemDAO = db.itemDao()!!
         if(list == null) return null
@@ -113,8 +113,8 @@ class Converters {
 
     @TypeConverter
     fun stringToListTree(string : String?): List<Tree>? {
-        db = Room.inMemoryDatabaseBuilder(
-            context, DataBase::class.java).build()
+        val context = ApplicationProvider.getApplicationContext<Context>()
+        db = DataBase.invoke(context)
         treeDAO = db.treeDao()!!
         if(string == null) return null
         var tree: Tree

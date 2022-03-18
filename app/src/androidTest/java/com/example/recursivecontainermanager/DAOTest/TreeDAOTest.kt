@@ -26,7 +26,7 @@ class TreeDAOTest {
     fun createDb() {
         val context = ApplicationProvider.getApplicationContext<Context>()
         db = Room.inMemoryDatabaseBuilder(
-            context, DataBase::class.java).build()
+            context, DataBase::class.java).enableMultiInstanceInvalidation().build()
         treeDAO = db.treeDao()!!
     }
 

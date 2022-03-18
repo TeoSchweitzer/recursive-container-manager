@@ -2,6 +2,7 @@ package com.example.recursivecontainermanager.dao
 
 import android.content.Context
 import androidx.room.*
+import androidx.test.core.app.ApplicationProvider
 import com.example.recursivecontainermanager.data.entities.Item
 import com.example.recursivecontainermanager.data.entities.Token
 import com.example.recursivecontainermanager.data.entities.Tree
@@ -26,7 +27,9 @@ abstract class DataBase : RoomDatabase() {
     abstract fun userCredentialsDao(): UserCredentialsDAO?
 
     companion object {
-        private const val DB_NAME = "Container.db"
+        const val DB_NAME = "Container.db"
+        val context = ApplicationProvider.getApplicationContext<Context>()
+        private lateinit var db: DataBase
 
         @Volatile
         private var instance: DataBase? = null
