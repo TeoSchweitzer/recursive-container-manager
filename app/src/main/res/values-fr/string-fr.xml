@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Manageur de conteneur récursif</string>
+    <string name="app_name">Gestionnaire de conteneur</string>
     <string name="default_position">dans</string>
     <string name="add_item_inside">Ajouter un objet</string>
     <string name="alter_item">Modifier Objet</string>
