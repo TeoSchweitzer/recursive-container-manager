@@ -46,5 +46,6 @@
     <string name="create_account_done">Account created, you can log in</string>
     <string name="authenticate_start">Finding your account...</string>
     <string name="authenticate_done">You are authenticated</string>
-    <string name="authenticate_user_not_found">Username and password don\'t match</string>
+    <string name="authenticate_user_not_found">Username and/or password are incorrect</string>
+    <string name="current_item">Current Item</string>
 </resources>

@@ -9,7 +9,6 @@
     android:background="@drawable/customborder"
     android:backgroundTint="@color/bleu_pomme">
 
-
     <TextView
         android:id="@+id/item_name_text"
         android:layout_width="wrap_content"
@@ -164,7 +163,7 @@
         android:maxWidth="170dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/item_owner_text"
-        tools:text="tag1, tag2, tag3, tag4, tag5, tag6" />
+        tools:text="tag1, tag2" />
 
     <TextView
         android:id="@+id/current_item_title"
@@ -176,7 +175,7 @@
         android:shadowDx="-2"
         android:shadowDy="-2"
         android:shadowRadius="1"
-        android:text="@string/location_chain"
+        android:text="@string/current_item"
         android:textAlignment="center"
         android:textColor="@color/yellow"
         android:textColorHint="@color/yellow"
