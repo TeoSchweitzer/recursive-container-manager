@@ -38,13 +38,13 @@
     <string name="content">Content</string>
     <string name="item_name">Item Name</string>
     <string name="refresh_done">Refreshing is done</string>
-    <string name="refresh_loading">Refreshing items...</string>
+    <string name="refresh_loading">Refreshing items…</string>
     <string name="unknown_error">Unknown error contacting the server</string>
     <string name="server_error">Server\'s response is not valid</string>
-    <string name="create_account_start">Creating account...</string>
+    <string name="create_account_start">Creating account…</string>
     <string name="create_account_name_taken">This username is taken</string>
     <string name="create_account_done">Account created, you can log in</string>
-    <string name="authenticate_start">Finding your account...</string>
+    <string name="authenticate_start">Finding your account…</string>
     <string name="authenticate_done">You are authenticated</string>
     <string name="authenticate_user_not_found">Username and/or password are incorrect</string>
     <string name="current_item">Current Item</string>
