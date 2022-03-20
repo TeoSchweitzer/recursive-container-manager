@@ -1,12 +1,14 @@
 package com.example.recursivecontainermanager.fragments
 
 import android.app.Dialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.allViews
+import androidx.core.view.isGone
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
@@ -30,8 +32,15 @@ open class MainMenuFragment: DialogFragment() {
         return AlertDialog.Builder(requireActivity())
             .setView(b.root)
             .setTitle("Main Settings")
-            .setPositiveButton("Confirm",  ::confirmMenu as DialogInterface.OnClickListener)
+            .setPositiveButton("Confirm", null)
             .create()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val d = dialog as AlertDialog?
+        val positiveButton: Button = d!!.getButton(AlertDialog.BUTTON_POSITIVE)
+        positiveButton.setOnClickListener { confirmMenu() }
     }
 
     fun chooseTab(tab: Int) {
@@ -52,10 +61,21 @@ open class MainMenuFragment: DialogFragment() {
     }
 
     private fun confirmMenu() {
+        if (b.serverAddressField.isGone && b.usernameField.isGone) {
+            Toast.makeText(context, "Please select a menu", Toast.LENGTH_SHORT).show()
+            return
+        }
         if (b.serverAddressField.isVisible) {
             val done = viewModel.newServerAddress(b.serverAddressField.text.toString())
-            if (done) Toast.makeText(context,"New server address was set.", Toast.LENGTH_SHORT).show()
+            if (done)  {
+                Toast.makeText(context,"New server address was set.", Toast.LENGTH_SHORT).show()
+                dialog!!.dismiss()
+            }
             else Toast.makeText(context,"New server address is not valid.", Toast.LENGTH_SHORT).show()
+        }
+        else if (b.usernameField.text.toString().isBlank() || b.passwordField.text.toString().isBlank()) {
+            Toast.makeText(context, "Please enter username and password", Toast.LENGTH_SHORT).show()
+            return
         }
         else if (b.passwordRepeatField.isVisible) {
             if (b.passwordField.text.toString()!=b.passwordRepeatField.text.toString()) {
@@ -63,10 +83,10 @@ open class MainMenuFragment: DialogFragment() {
                 return
             }
             viewModel.createAccount(b.usernameField.text.toString(), b.passwordField.text.toString())
+            dialog!!.dismiss()
         }
-        else if (b.usernameField.isVisible) {
-            viewModel.authenticate(b.usernameField.text.toString(), b.passwordField.text.toString())
-        }
+        viewModel.authenticate(b.usernameField.text.toString(), b.passwordField.text.toString())
+        dialog!!.dismiss()
     }
 
     override fun onDestroyView() {

@@ -41,12 +41,14 @@ class MainFragment: Fragment() {
             Toast.makeText(context, getString(it), Toast.LENGTH_SHORT).show()
             if (it == R.string.authenticate_user_not_found || it == R.string.create_account_done) {
                 val frag = MainMenuFragment()
-                frag.show(parentFragmentManager, null)
+                frag.showNow(parentFragmentManager, null)
                 frag.chooseTab(1)
             } else if (it == R.string.create_account_name_taken) {
                 val frag = MainMenuFragment()
-                frag.show(parentFragmentManager, null)
+                frag.showNow(parentFragmentManager, null)
                 frag.chooseTab(2)
+            } else if (it == R.string.refresh_done) {
+                binding.mainRefresh.isRefreshing = false
             }
         }
     }

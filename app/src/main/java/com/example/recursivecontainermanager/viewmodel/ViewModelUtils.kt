@@ -1,9 +1,9 @@
 package com.example.recursivecontainermanager.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.example.recursivecontainermanager.client.MainApi
 import com.example.recursivecontainermanager.data.entities.Item
 import com.example.recursivecontainermanager.data.entities.Tree
+import java.util.Collections.max
 
 open class ViewModelUtils: ViewModel() {
 
@@ -69,4 +69,24 @@ open class ViewModelUtils: ViewModel() {
         return toKeep
     }
 
+    protected fun splitFilter(filter: String): List<String> {
+        return filter.replace(" ", "").split(',')
+    }
+
+    protected fun getMaxDepth(tree: Tree): Int {
+        if (tree.children == null) return 0
+        val childMax = mutableListOf<Int>()
+        for (child in tree.children) { childMax.add(1 + getMaxDepth(child)) }
+        return max(childMax)
+    }
+
+    protected fun findItemFromId(itemId: String, tree: Tree): Item? {
+        if (tree.item.id == itemId) return tree.item
+        if (tree.children == null) return null
+        for (child in tree.children) {
+            val item = findItemFromId(itemId, child)
+            if (item != null) return item
+        }
+        return null
+    }
 }

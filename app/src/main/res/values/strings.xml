@@ -48,4 +48,18 @@
     <string name="authenticate_done">You are authenticated</string>
     <string name="authenticate_user_not_found">Username and/or password are incorrect</string>
     <string name="current_item">Current Item</string>
+    <string name="find_token_loading">Trying to find the token…</string>
+    <string name="find_token_done">Token Confirmed, please Refresh</string>
+    <string name="find_token_not_found">Token not found</string>
+    <string name="no_tags_text">(no tags)</string>
+    <string name="no_tokens_text">(no tokens)</string>
+    <string name="blank_item_text">No Data Yet</string>
+    <string name="qr_code_loading">Finding item from QR code…</string>
+    <string name="no_tree">You don\'t have access to any item</string>
+    <string name="qr_code_match_nothing">This QR Code matches no accessible item</string>
+    <string name="new_token_start">Creating new token...</string>
+    <string name="new_token_done">New token was created</string>
+    <string name="item_edition_start">Editing items...</string>
+    <string name="item_edition_done">Edition done</string>
+    <string name="item_edition_conflict">Items edited recently, please try again</string>
 </resources>

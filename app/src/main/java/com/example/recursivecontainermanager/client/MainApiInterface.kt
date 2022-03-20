@@ -47,7 +47,7 @@ interface MainApiInterface {
 
     //Manage Tokens
     @POST("token")
-    suspend fun createToken(@Body token: Token): Response<Unit>
+    suspend fun createToken(@Body token: NewToken): Response<Unit>
 
     @GET("token/{tokenCode}")
     suspend fun getToken(@Path("tokenCode") tokenCode: String): Response<Unit>

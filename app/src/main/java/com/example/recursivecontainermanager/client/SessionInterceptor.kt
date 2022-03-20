@@ -1,6 +1,8 @@
 package com.example.recursivecontainermanager.client
 
+import android.content.res.Resources
 import com.example.recursivecontainermanager.exceptions.InvalidCredentialsException
+import com.example.recursivecontainermanager.exceptions.ResourceNotFoundException
 import com.example.recursivecontainermanager.exceptions.ServerError
 import com.example.recursivecontainermanager.exceptions.ServerErrorException
 import okhttp3.Interceptor
@@ -33,6 +35,8 @@ class SessionInterceptor: Interceptor {
             throw InvalidCredentialsException()
         if (response.isRedirect && response.headers["Location"] == null)
             throw ServerErrorException(ServerError.MALFORMED_RESPONSE, response.headers("Location").toString())
+        if (response.code == 404)
+            throw ResourceNotFoundException()
 
         /** Return response if no exception is to be thrown */
         return response

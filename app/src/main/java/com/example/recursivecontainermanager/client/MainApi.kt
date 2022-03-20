@@ -1,9 +1,6 @@
 package com.example.recursivecontainermanager.client
 
-import com.example.recursivecontainermanager.data.entities.Item
-import com.example.recursivecontainermanager.data.entities.Token
-import com.example.recursivecontainermanager.data.entities.Tree
-import com.example.recursivecontainermanager.data.entities.User
+import com.example.recursivecontainermanager.data.entities.*
 import com.example.recursivecontainermanager.exceptions.*
 import com.example.recursivecontainermanager.exceptions.ServerError.*
 import com.squareup.moshi.Moshi
@@ -116,17 +113,18 @@ object MainApi {
         if (response.code() == 412) throw EditionConflictException()
     }
 
-    suspend fun createToken(itemUuid: String, authorizationType: String, end: Date): String {
-        val token = Token(itemUuid, authorizationType, end.time)
+    suspend fun createToken(itemUuid: String, authorizationType: String, end: Long): String {
+        val token = NewToken(itemUuid, authorizationType, end)
         val response = retrofitService.createToken(token)
         if (response.code()!=201) throw ServerErrorException(IMPOSSIBLE_STATUS_RESPONSE, response.code().toString())
         return response.headers()["Location"]!!.substringAfter("/token/")
     }
 
-    suspend fun getToken(code: String){
+    suspend fun getToken(code: String): String {
         val response = retrofitService.getToken(code)
-        if (response.code()!=200) throw ServerErrorException(IMPOSSIBLE_STATUS_RESPONSE, response.code().toString())
+        if (response.code()!=302) throw ServerErrorException(IMPOSSIBLE_STATUS_RESPONSE, response.code().toString())
         if (sessionCookie=="") setNewSession(response)
+        return response.headers()["Location"]!!.substringAfter("/user/")
     }
 
     private fun setNewSession(resp: Response<Unit>) {
