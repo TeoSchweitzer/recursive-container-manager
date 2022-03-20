@@ -1,8 +1,6 @@
 package com.example.recursivecontainermanager.viewmodel
 
 import android.content.Context
-import android.graphics.drawable.Drawable
-import android.view.View
 import android.widget.ImageView
 import androidx.lifecycle.*
 import com.example.recursivecontainermanager.R
@@ -12,9 +10,9 @@ import com.example.recursivecontainermanager.data.entities.Tree
 import com.example.recursivecontainermanager.exceptions.*
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.readValue
 import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.BarcodeEncoder
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import java.io.IOException
 
@@ -265,5 +263,9 @@ class MainViewModel: ViewModelUtils() {
                 _loadingStatus.value = R.string.unknown_error
             }
         }
+    }
+
+    fun importItem(itemJson: String): Item {
+        return jacksonObjectMapper().readValue(itemJson)
     }
 }

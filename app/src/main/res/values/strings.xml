@@ -62,4 +62,5 @@
     <string name="item_edition_start">Editing items...</string>
     <string name="item_edition_done">Edition done</string>
     <string name="item_edition_conflict">Items edited recently, please try again</string>
+    <string name="paste_item">Paste Item</string>
 </resources>
