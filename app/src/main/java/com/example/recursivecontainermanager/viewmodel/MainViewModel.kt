@@ -216,4 +216,54 @@ class MainViewModel: ViewModelUtils() {
             }
         }
     }
+
+    fun addItem(name:String,owners:String,subOwners:String,readOnly:String,tags:String,position:String) {
+        if (currentItem.value == null) return
+        val newItem = Item("", name, currentItem.value!!.id,
+            splitFilter(owners),
+            splitFilter(subOwners),
+            splitFilter(readOnly),
+            splitFilter(tags),
+            position.ifBlank {"in"},
+            listOf()
+        )
+        _loadingStatus.value = R.string.item_edition_start
+        viewModelScope.launch {
+            try {
+                MainApi.addItem(newItem)
+                _loadingStatus.value = R.string.item_edition_done
+                executeItemFetching()
+            } catch (e: EditionConflictException) {
+                executeItemFetching()
+                _loadingStatus.value = R.string.item_edition_conflict
+            } catch (e: Exception) {
+                _loadingStatus.value = R.string.unknown_error
+            }
+        }
+    }
+
+    fun alterItem(name:String,owners:String,subOwners:String,readOnly:String,tags:String,position:String) {
+        if (currentItem.value == null) return
+        val newItem = Item(currentItem.value!!.id, name, currentItem.value!!.container,
+            splitFilter(owners),
+            splitFilter(subOwners),
+            splitFilter(readOnly),
+            splitFilter(tags),
+            position.ifBlank {"in"},
+            listOf()
+        )
+        _loadingStatus.value = R.string.item_edition_start
+        viewModelScope.launch {
+            try {
+                MainApi.alterItem(newItem)
+                _loadingStatus.value = R.string.item_edition_done
+                executeItemFetching()
+            } catch (e: EditionConflictException) {
+                executeItemFetching()
+                _loadingStatus.value = R.string.item_edition_conflict
+            } catch (e: Exception) {
+                _loadingStatus.value = R.string.unknown_error
+            }
+        }
+    }
 }

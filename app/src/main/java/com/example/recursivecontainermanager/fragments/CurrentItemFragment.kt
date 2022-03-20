@@ -146,7 +146,7 @@ class CurrentItemFragment: Fragment() {
         if (viewModel.currentItem.value == null) return
         val frag = ItemEditionFragment()
         frag.showNow(parentFragmentManager, null)
-        frag.setupForAddition(viewModel.currentItem.value!!)
+        frag.setupForAddition()
     }
 
     private fun itemEdition() {
