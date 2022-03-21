@@ -5,7 +5,7 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.matcher.ViewMatchers.assertThat
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.example.recursivecontainermanager.dao.DataBase
+import com.example.recursivecontainermanager.database.DataBase
 import com.example.recursivecontainermanager.data.entities.Item
 import com.example.recursivecontainermanager.data.entities.Token
 import com.example.recursivecontainermanager.database.dao.ItemDAO
@@ -62,7 +62,7 @@ class ItemDAOTest {
             arrayListOf(token1,token2)
         )
         itemDAO.addItem(item)
-        val itemRead = itemDAO.getItem(item.id)
+        val itemRead = itemDAO.getItem(item.location)
         assertThat(item, equalTo(itemRead))
     }
 
@@ -103,7 +103,7 @@ class ItemDAOTest {
         )
         itemDAO.addItem(item)
         itemDAO.alterItem(newitem)
-        val itemRead = itemDAO.getItem(item.id)
+        val itemRead = itemDAO.getItem(item.location)
         assertThat(newitem, equalTo(itemRead))
     }
 
@@ -144,7 +144,7 @@ class ItemDAOTest {
         )
         itemDAO.addItem(item)
         itemDAO.addItem(newitem)
-        val itemRead = itemDAO.getItem(item.id)
+        val itemRead = itemDAO.getItem(item.location)
         assertThat(newitem, equalTo(itemRead))
     }
 
@@ -174,7 +174,7 @@ class ItemDAOTest {
         )
         itemDAO.addItem(item)
         itemDAO.deleteItem(item)
-        val itemRead = itemDAO.getItem(item.id)
+        val itemRead = itemDAO.getItem(item.location)
         assertThat(null, equalTo(itemRead))
     }
 }

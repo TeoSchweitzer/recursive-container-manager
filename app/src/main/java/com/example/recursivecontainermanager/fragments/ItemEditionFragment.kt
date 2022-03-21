@@ -49,12 +49,8 @@ class ItemEditionFragment: DialogFragment() {
             .create()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
     fun setupForAddition() {
+        binding.itemOwnersField.setText(viewModel.currentUser)
         val d = dialog as AlertDialog?
         val positiveButton: Button = d!!.getButton(AlertDialog.BUTTON_POSITIVE)
         positiveButton.setOnClickListener {
@@ -85,7 +81,7 @@ class ItemEditionFragment: DialogFragment() {
         }
     }
 
-    fun setItem(item: Item) {
+    private fun setItem(item: Item) {
         binding.itemNameField.setText(item.name)
         binding.itemOwnersField.setText(joinList(item.owners))
         binding.itemSubOwnersField.setText(joinList(item.subOwners))
@@ -97,5 +93,10 @@ class ItemEditionFragment: DialogFragment() {
     private fun joinList(list: List<String>?): String {
         if (list == null) return ""
         return list.joinToString(", ")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

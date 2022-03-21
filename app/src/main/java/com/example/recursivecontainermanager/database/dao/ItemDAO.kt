@@ -8,7 +8,7 @@ interface ItemDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addItem(item: Item)
 
-    @Query("SELECT * FROM Item WHERE id IN (:itemUuid)")
+    @Query("SELECT * FROM Item WHERE location IN (:itemUuid)")
     fun getItem(itemUuid: String): Item
 
     @Update

@@ -8,15 +8,21 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.recursivecontainermanager.R
+import com.example.recursivecontainermanager.MainApplication
 import com.example.recursivecontainermanager.databinding.MainFragmentBinding
 import com.example.recursivecontainermanager.viewmodel.MainViewModel
-
+import com.example.recursivecontainermanager.viewmodel.MainViewModelFactory
 
 class MainFragment: Fragment() {
     private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: MainViewModel by activityViewModels()
+    private val viewModel: MainViewModel by activityViewModels {
+        MainViewModelFactory(
+            (activity?.application as MainApplication).database.treeDao(),
+            requireContext().getSharedPreferences("myPreference", Context.MODE_PRIVATE)
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,10 +53,11 @@ class MainFragment: Fragment() {
                 val frag = MainMenuFragment()
                 frag.showNow(parentFragmentManager, null)
                 frag.chooseTab(2)
-            } else if (it == R.string.refresh_done) {
+            } else if (it != R.string.refresh_loading) {
                 binding.mainRefresh.isRefreshing = false
             }
         }
+        viewModel.fetchItems()
     }
 
     private fun onRefresh(){

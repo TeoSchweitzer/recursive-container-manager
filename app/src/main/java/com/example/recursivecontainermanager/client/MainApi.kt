@@ -9,7 +9,6 @@ import okhttp3.OkHttpClient
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import java.util.*
 import java.util.concurrent.TimeUnit
 
 
@@ -56,6 +55,9 @@ object MainApi {
     private var serverAddress = "http://gr3-webmobile.herokuapp.com"
     private var sessionCookie = ""
     private var itemsEtag = ""
+
+    fun getItemsEtag() = itemsEtag
+    fun setItemsEtag(etag: String) {itemsEtag = etag}
 
     fun getSessionCookie() = sessionCookie
     fun setSessionCookie(cookie: String) {sessionCookie = cookie}
@@ -104,7 +106,7 @@ object MainApi {
     }
 
     suspend fun alterItem(item: Item) {
-        val response = retrofitService.alterItem(item.id, item, itemsEtag)
+        val response = retrofitService.alterItem(item.location, item, itemsEtag)
         if (response.code() == 412) throw EditionConflictException()
     }
 

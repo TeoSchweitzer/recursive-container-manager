@@ -13,6 +13,7 @@ import androidx.core.view.drawToBitmap
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.recursivecontainermanager.R
+import com.example.recursivecontainermanager.data.entities.Item
 import com.example.recursivecontainermanager.data.entities.Token
 import com.example.recursivecontainermanager.databinding.CurrentItemFragmentBinding
 import com.example.recursivecontainermanager.viewmodel.MainViewModel
@@ -41,8 +42,10 @@ class CurrentItemFragment: Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        if (viewModel.currentItem.value == null) setBlankItem()
-        else setCurrentItem()
+        viewModel.currentItem.observe(requireActivity()) {
+            if (it == null) setBlankItem()
+            else setCurrentItem(it)
+        }
         binding.tokenSharingButton.setOnClickListener { shareToken() }
         binding.jsonSharingButton.setOnClickListener { shareText(viewModel.itemJsonFormat()) }
         binding.qrcodeSharingButton.setOnClickListener { shareQRCode() }
@@ -119,8 +122,7 @@ class CurrentItemFragment: Fragment() {
         binding.itemTokensText.visibility = View.INVISIBLE
     }
 
-    private fun setCurrentItem() {
-        val item = viewModel.currentItem.value!!
+    private fun setCurrentItem(item: Item) {
         binding.itemNameText.text = item.name
         binding.itemOwnerText.text = item.owners.joinToString(", ")
         if (item.tags == null)

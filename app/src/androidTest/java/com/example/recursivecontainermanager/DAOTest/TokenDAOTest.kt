@@ -5,7 +5,7 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.matcher.ViewMatchers.assertThat
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.example.recursivecontainermanager.dao.DataBase
+import com.example.recursivecontainermanager.database.DataBase
 import com.example.recursivecontainermanager.data.entities.Token
 import com.example.recursivecontainermanager.database.dao.TokenDAO
 import org.hamcrest.Matchers.equalTo

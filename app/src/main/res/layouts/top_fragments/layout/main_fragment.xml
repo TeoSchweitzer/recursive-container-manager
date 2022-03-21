@@ -89,7 +89,7 @@
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/location_chain_fragment_view"
                 android:name="com.example.recursivecontainermanager.fragments.LocationChainFragment"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
                 app:layout_constraintEnd_toEndOf="parent"

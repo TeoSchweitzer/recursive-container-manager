@@ -20,9 +20,6 @@ interface MainApiInterface {
 
 
     //Manage Trees
-    //@GET("find")
-    //suspend fun findTree(@Query("item") item: String): Response<Unit>
-
     @GET("user/{username}")
     suspend fun getUserItems(
         @Path("username") username: String,

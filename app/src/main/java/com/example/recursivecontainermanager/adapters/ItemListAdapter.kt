@@ -1,12 +1,9 @@
 package com.example.recursivecontainermanager.adapters
 
 import android.content.Context
-import android.content.res.Resources
-import android.provider.Settings.Global.getString
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -29,7 +26,7 @@ class ItemListAdapter(private val itemList: List<Item>,
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        holder.bind(itemList[position], withPosition)
+        holder.bind(itemList[position], withPosition, position==itemList.lastIndex)
         holder.itemView.setOnClickListener {
             touchItem(itemList[position])
         }
@@ -37,9 +34,9 @@ class ItemListAdapter(private val itemList: List<Item>,
 
     class ItemViewHolder(var context: Context, var binding: ItemInListViewBinding):
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Item, withPosition: Boolean) {
+        fun bind(item: Item, withPosition: Boolean, isLast: Boolean) {
             binding.itemNameText.text = item.name
-            if (withPosition) {
+            if (withPosition && !isLast) {
                 binding.positionDescriptionText.visibility = View.VISIBLE
                 if (item.position == "")
                      binding.positionDescriptionText.text = context.getString(R.string.default_position)
@@ -54,7 +51,7 @@ class ItemListAdapter(private val itemList: List<Item>,
     companion object {
         private val DiffCallback = object : DiffUtil.ItemCallback<Item>() {
             override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
-                return oldItem.id == newItem.id
+                return oldItem.location == newItem.location
             }
 
             override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean {

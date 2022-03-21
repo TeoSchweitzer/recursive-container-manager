@@ -2,12 +2,11 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/customborder"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_gravity="center"
     android:orientation="vertical"
-    android:backgroundTint="@color/red"
-    android:layout_margin="1dp">
+    android:layout_margin="0dp">
 
     <TextView
         android:id="@+id/item_name_text"
@@ -15,8 +14,11 @@
         android:layout_height="wrap_content"
         android:background="@drawable/list_view_item_name"
         tools:text="Item Name"
+        android:textSize="26sp"
         android:textColor="@color/yellow"
         android:shadowColor="@color/violet"
+        android:layout_marginBottom="8dp"
+        android:layout_gravity="center"
         android:shadowDx="-2"
         android:shadowDy="-2"
         android:shadowRadius="1"/>
@@ -25,12 +27,16 @@
         android:id="@+id/position_description_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:background="@drawable/list_view_item_postion"
-        tools:text="Item Position"
-        android:textColor="@color/yellow"
         android:shadowColor="@color/violet"
+        android:layout_marginBottom="8dp"
         android:shadowDx="-2"
         android:shadowDy="-2"
-        android:shadowRadius="1"/>
+        android:shadowRadius="1"
+        android:textColor="@color/yellow"
+        android:textSize="23sp"
+        android:textStyle="italic"
+        tools:text="Item Position" />
 
 </LinearLayout>

@@ -5,7 +5,7 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.matcher.ViewMatchers.assertThat
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.example.recursivecontainermanager.dao.DataBase
+import com.example.recursivecontainermanager.database.DataBase
 import com.example.recursivecontainermanager.data.entities.Item
 import com.example.recursivecontainermanager.data.entities.Token
 import com.example.recursivecontainermanager.data.entities.Tree
@@ -65,7 +65,7 @@ class TreeDAOTest {
             null
         )
         treeDAO.addTree(tree)
-        val treeRead = treeDAO.getTree(tree.item.id)
+        val treeRead = treeDAO.getTree(tree.item.location)
         assertThat(tree, equalTo(treeRead))
     }
 
@@ -117,7 +117,7 @@ class TreeDAOTest {
             listOf(treechild1, treechild2)
         )
         treeDAO.addTree(tree)
-        val treeRead = treeDAO.getTree(tree.item.id)
+        val treeRead = treeDAO.getTree(tree.item.location)
         assertThat(tree, equalTo(treeRead))
     }
 
@@ -177,7 +177,7 @@ class TreeDAOTest {
             listOf(treechild1, treechild2)
         )
         treeDAO.addTree(tree)
-        val treeRead = treeDAO.getTree(tree.item.id)
+        val treeRead = treeDAO.getTree(tree.item.location)
         assertThat(tree, equalTo(treeRead))
     }
 

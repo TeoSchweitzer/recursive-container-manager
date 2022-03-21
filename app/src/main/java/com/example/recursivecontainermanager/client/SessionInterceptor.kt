@@ -65,10 +65,8 @@ class SessionInterceptor: Interceptor {
         for (header in response.headers) headers.add("${header.first}: ${header.second}")
         result+="\nheaders : $headers"
         result+="\ncacheControl : ${response.cacheControl}"
-        if (response.body != null) {
-            val body = response.body!!.source().buffer.clone()
-                .asResponseBody(response.body!!.contentType(), response.body!!.contentLength())
-            result+="\nbody : ${body.string()}"
+        if (response.body != null && false) {
+            result+="\nbody : ${response.body!!.string()}"
         }
         result+="\nrequest : ${displayRequest(response.request)}\n"
         return result

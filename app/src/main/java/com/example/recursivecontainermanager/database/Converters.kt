@@ -2,10 +2,10 @@ package com.example.recursivecontainermanager.database
 
 import android.content.Context
 import android.util.Log
-import androidx.room.Room
 import androidx.room.TypeConverter
 import androidx.test.core.app.ApplicationProvider
-import com.example.recursivecontainermanager.dao.DataBase
+import androidx.test.core.app.ApplicationProvider.getApplicationContext
+import com.example.recursivecontainermanager.MainApplication
 import com.example.recursivecontainermanager.data.entities.Item
 import com.example.recursivecontainermanager.data.entities.Token
 import com.example.recursivecontainermanager.data.entities.Tree
@@ -21,12 +21,7 @@ class Converters {
     @TypeConverter
     fun listToString(list : List<String>?): String? {
         if(list == null) return null
-        var value : String = ""
-        for(i in 0..list.size-2){
-            value += list[i] + ","
-        }
-        value += list[list.size-1]
-        return value
+        return list.joinToString(",")
     }
 
     @TypeConverter
@@ -70,18 +65,16 @@ class Converters {
 
     @TypeConverter
     fun itemToString(item : Item): String {
-        val context = ApplicationProvider.getApplicationContext<Context>()
-        db = DataBase.invoke(context)
+        db = DataBase.invoke(MainApplication.context!!)
         itemDAO = db.itemDao()!!
         itemDAO.addItem(item)
-        Log.i("test_item_add",item.id +" "+ item.owners[0])
-        return item.id
+        Log.i("test_item_add",item.location +" "+ item.owners[0])
+        return item.location
     }
 
     @TypeConverter
     fun stringToItem(string : String): Item {
-        val context = ApplicationProvider.getApplicationContext<Context>()
-        db = DataBase.invoke(context)
+        db = DataBase.invoke(MainApplication.context!!)
         itemDAO = db.itemDao()!!
         Log.i("test_item_get",string)
         val item: Item = itemDAO.getItem(string) //TODO return null trouver pourquoi
@@ -91,26 +84,20 @@ class Converters {
 
     @TypeConverter
     fun listTreeToString(list : List<Tree>?): String? {
-        val context = ApplicationProvider.getApplicationContext<Context>()
-        db = DataBase.invoke(context)
-        treeDAO = db.treeDao()!!
-        //itemDAO = db.itemDao()!!
+        db = DataBase.invoke(MainApplication.context!!)
+        treeDAO = db.treeDao()
         if(list == null) return null
-        var value : String = ""
-        for (tree in 0..list.size-2){
-            treeDAO.addTree(list[tree])
-            //itemDAO.addItem(list[tree].item)
-            value += list[tree].item.id + ","
+        var value = ""
+        for (tree in list){
+            treeDAO.addTree(tree)
+            value += tree.item.location + ","
         }
-        treeDAO.addTree(list[list.size-1])
-        value += list[list.size-1].item.id
-        return value
+        return value.substringBeforeLast(',')
     }
 
     @TypeConverter
     fun stringToListTree(string : String?): List<Tree>? {
-        val context = ApplicationProvider.getApplicationContext<Context>()
-        db = DataBase.invoke(context)
+        db = DataBase.invoke(MainApplication.context!!)
         treeDAO = db.treeDao()!!
         if(string == null) return null
         var tree: Tree

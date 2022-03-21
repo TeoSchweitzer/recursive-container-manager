@@ -9,7 +9,7 @@ open class ViewModelUtils: ViewModel() {
 
     protected fun getItemLocation(item: Item, tree: Tree, location: MutableList<Item>): List<Item> {
         location.add(tree.item)
-        if (item.id == tree.item.id) return location.reversed()
+        if (item.location == tree.item.location) return location.reversed()
         if (tree.children == null) return mutableListOf()
         for (child in tree.children) {
             val childResult = getItemLocation(item, child, location)
@@ -19,7 +19,7 @@ open class ViewModelUtils: ViewModel() {
     }
 
     protected fun getSubTree(itemId: String, tree: Tree): Tree? {
-        if (itemId == tree.item.id) return tree
+        if (itemId == tree.item.location) return tree
         if (tree.children == null) return null
         for (child in tree.children) {
             val childResult = getSubTree(itemId, child)
@@ -77,11 +77,15 @@ open class ViewModelUtils: ViewModel() {
         if (tree.children == null) return 0
         val childMax = mutableListOf<Int>()
         for (child in tree.children) { childMax.add(1 + getMaxDepth(child)) }
-        return max(childMax)
+        var max = 0
+        for (candidate in childMax) {
+            if (candidate>max) max = candidate
+        }
+        return max
     }
 
     protected fun findItemFromId(itemId: String, tree: Tree): Item? {
-        if (tree.item.id == itemId) return tree.item
+        if (tree.item.location == itemId) return tree.item
         if (tree.children == null) return null
         for (child in tree.children) {
             val item = findItemFromId(itemId, child)
