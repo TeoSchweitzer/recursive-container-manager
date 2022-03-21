@@ -2,6 +2,7 @@ package com.example.recursivecontainermanager.database
 
 import android.content.Context
 import android.util.Log
+import androidx.room.Room
 import androidx.room.TypeConverter
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.core.app.ApplicationProvider.getApplicationContext
@@ -68,7 +69,6 @@ class Converters {
         db = DataBase.invoke(MainApplication.context!!)
         itemDAO = db.itemDao()!!
         itemDAO.addItem(item)
-        Log.i("test_item_add",item.location +" "+ item.owners[0])
         return item.location
     }
 
@@ -76,9 +76,7 @@ class Converters {
     fun stringToItem(string : String): Item {
         db = DataBase.invoke(MainApplication.context!!)
         itemDAO = db.itemDao()!!
-        Log.i("test_item_get",string)
-        val item: Item = itemDAO.getItem(string) //TODO return null trouver pourquoi
-        Log.i("test_item_get",string + " - " + item)
+        val item: Item = itemDAO.getItem(string)
         return item
     }
 

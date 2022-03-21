@@ -7,6 +7,7 @@ import com.example.recursivecontainermanager.data.entities.Item
 import com.example.recursivecontainermanager.data.entities.Token
 import com.example.recursivecontainermanager.data.entities.Tree
 import com.example.recursivecontainermanager.data.entities.UserCredentials
+import com.example.recursivecontainermanager.database.Converters
 import com.example.recursivecontainermanager.database.dao.ItemDAO
 import com.example.recursivecontainermanager.database.dao.TokenDAO
 import com.example.recursivecontainermanager.database.dao.TreeDAO
@@ -48,26 +49,4 @@ abstract class DataBase : RoomDatabase() {
         }
 
     }
-    /*
-    companion object {
-        const val DB_NAME = "Container.db"
-        val context = ApplicationProvider.getApplicationContext<Context>()
-        private lateinit var db: DataBase
-
-        @Volatile
-        private var instance: DataBase? = null
-        private val LOCK = Any()
-
-        operator fun invoke(context: Context) = instance ?: synchronized(LOCK) {
-            instance ?: buildDatabase(context).also{
-                instance = it
-            }
-        }
-
-        private fun buildDatabase(context: Context) = Room.databaseBuilder(
-            context.applicationContext,
-            DataBase::class.java,
-            DB_NAME
-        ).fallbackToDestructiveMigration().build()
-    }*/
 }
