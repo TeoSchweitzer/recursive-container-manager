@@ -16,7 +16,7 @@ import com.example.recursivecontainermanager.database.dao.UserCredentialsDAO
 
 @Database(
     entities = [Item::class, Tree::class, Token::class, UserCredentials::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
