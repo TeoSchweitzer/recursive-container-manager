@@ -24,6 +24,7 @@ class ItemContentFragment:  Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         binding.nameTagFilterField.addTextChangedListener(textWatcher)
         binding.minRecursionButton.setOnClickListener  {
             viewModel.newContentFilter(-2, binding.nameTagFilterField.text.toString())
@@ -43,6 +44,9 @@ class ItemContentFragment:  Fragment() {
         }
         viewModel.itemContent.observe(requireActivity()) { list ->
             binding.itemContentRecycler.adapter = ItemListAdapter(list, {viewModel.changeCurrentItem(it)}, false)
+        }
+        viewModel.currentItem.observe(viewLifecycleOwner) {
+            binding.nameTagFilterField.setText("")
         }
     }
 

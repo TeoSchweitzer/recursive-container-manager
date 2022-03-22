@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Item(
-    @PrimaryKey val location: String, //uuid
+    @PrimaryKey var location: String, //uuid
     var name: String,
     var container: String?, //foreign key id
     var owners: List<String>,

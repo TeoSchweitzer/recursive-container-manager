@@ -63,4 +63,7 @@
     <string name="item_edition_done">Edition done</string>
     <string name="item_edition_conflict">Items edited recently, please try again</string>
     <string name="paste_item">Paste Item</string>
+    <string name="item_edition_not_container">Current item is not a container</string>
+    <string name="tags_title">"Tags: "</string>
+    <string name="token_title">"Tokens: "</string>
 </resources>

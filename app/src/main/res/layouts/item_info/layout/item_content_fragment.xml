@@ -142,6 +142,7 @@
         android:layout_marginTop="2dp"
         android:background="@drawable/customtitleborder"
         android:text="@string/content"
+        android:textSize="18sp"
         android:textAlignment="center"
         android:textColor="@color/yellow"
         android:textColorHint="@color/yellow"

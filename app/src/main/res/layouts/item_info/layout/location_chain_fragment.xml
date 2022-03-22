@@ -13,7 +13,7 @@
 
     <TextView
         android:id="@+id/title_location_chain"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="16dp"
@@ -22,6 +22,7 @@
         android:textColor="@color/yellow"
         android:textColorHint="@color/yellow"
         android:shadowColor="@color/violet"
+        android:textAlignment="center"
         android:textSize="18sp"
         android:shadowDx="-2"
         android:shadowDy="-2"
