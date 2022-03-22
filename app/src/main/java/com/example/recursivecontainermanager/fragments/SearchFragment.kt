@@ -44,6 +44,8 @@ class SearchFragment: Fragment() {
 
     fun focusSearchBar() {
         binding.nameSearchField.requestFocus()
+        binding.nameSearchField.setText("")
+        binding.tagFilterField.setText("")
         (requireContext().getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager)
             .showSoftInput(binding.nameSearchField, InputMethodManager.SHOW_IMPLICIT)
     }

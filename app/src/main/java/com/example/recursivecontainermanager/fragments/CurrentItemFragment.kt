@@ -49,9 +49,19 @@ class CurrentItemFragment: Fragment() {
         binding.tokenSharingButton.setOnClickListener { shareToken() }
         binding.jsonSharingButton.setOnClickListener { shareText(viewModel.itemJsonFormat()) }
         binding.qrcodeSharingButton.setOnClickListener { shareQRCode() }
-        binding.addItemButton.setOnClickListener { itemAddition() }
-        binding.alterItemButton.setOnClickListener { itemEdition() }
-        binding.deleteItemButton.setOnClickListener { deleteItem() }
+        binding.addItemButton.setOnClickListener {
+            if (viewModel.itemIsContainer() && !viewModel.userIsReadonly()) itemAddition()
+            else if (viewModel.userIsReadonly()) Toast.makeText(context, "You are a Read Ony user", Toast.LENGTH_LONG).show()
+            else Toast.makeText(context, "Add \"container\" to the tags to add items inside", Toast.LENGTH_LONG).show()
+        }
+        binding.alterItemButton.setOnClickListener {
+            if (viewModel.userIsReadonly()) Toast.makeText(context, "You are a Read Ony user", Toast.LENGTH_LONG).show()
+            else itemEdition()
+        }
+        binding.deleteItemButton.setOnClickListener {
+            if (viewModel.userIsReadonly()) Toast.makeText(context, "You are a Read Ony user", Toast.LENGTH_LONG).show()
+            else deleteItem()
+        }
     }
 
     private fun shareToken() {
@@ -124,15 +134,44 @@ class CurrentItemFragment: Fragment() {
 
     private fun setCurrentItem(item: Item) {
         binding.itemNameText.text = item.name
-        binding.itemOwnerText.text = item.owners.joinToString(", ")
-        if (item.tags == null)
-            binding.itemTagsText.text = getString(R.string.no_tags_text)
-        else
+        binding.itemOwnerText.text =  formatOwners(item)
+        if (item.tags.isNullOrEmpty()) {
+            binding.itemTagsText.visibility = View.GONE
+            binding.itemTagsTitle.visibility = View.GONE
+        }
+        else {
+            binding.itemTagsText.visibility = View.VISIBLE
+            binding.itemTagsTitle.visibility = View.VISIBLE
             binding.itemTagsText.text = item.tags!!.joinToString(", ")
-        if (item.tokens == null)
-            binding.itemTagsText.text = getString(R.string.no_tokens_text)
-        else
+        }
+        if (item.tokens.isNullOrEmpty()) {
+            binding.itemTokensText.visibility = View.GONE
+            binding.itemTokensTitle.visibility = View.GONE
+        }
+        else {
+            binding.itemTokensText.visibility = View.VISIBLE
+            binding.itemTokensTitle.visibility = View.VISIBLE
             binding.itemTokensText.text = formatTokens(item.tokens!!)
+        }
+    }
+
+    private fun formatOwners(item: Item): String {
+        var result = "Owners: "+item.owners.joinToString(", ")
+        if (!item.subOwners.isNullOrEmpty()) {
+            val subs = mutableListOf<String>()
+            for (subOwner in item.subOwners!!) {
+                if (subOwner.isNotBlank()) subs.add(subOwner)
+            }
+            if (subs.isNotEmpty()) result += "\nSubOwners: "+ subs.joinToString(", ")
+        }
+        if (!item.readonly.isNullOrEmpty()) {
+            val readers = mutableListOf<String>()
+            for (reader in item.readonly!!) {
+                if (reader.isNotBlank()) readers.add(reader)
+            }
+            if (readers.isNotEmpty()) result += "\nRead Only: "+ readers.joinToString(", ")
+        }
+        return result
     }
 
     @SuppressLint("SimpleDateFormat")
@@ -152,7 +191,10 @@ class CurrentItemFragment: Fragment() {
     }
 
     private fun itemEdition() {
-        if (viewModel.currentItem.value == null) return
+        if (viewModel.currentItem.value == null) {
+            Toast.makeText(context, "viewModel.currentItem.value is null", Toast.LENGTH_LONG).show()
+            return
+        }
         val frag = ItemEditionFragment()
         frag.showNow(parentFragmentManager, null)
         frag.setupForEdition(viewModel.currentItem.value!!)

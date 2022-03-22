@@ -57,6 +57,9 @@ class MainFragment: Fragment() {
                 binding.mainRefresh.isRefreshing = false
             }
         }
+        viewModel.currentItem.observe(viewLifecycleOwner) {
+            cancelSearchFocus()
+        }
         viewModel.fetchItems()
     }
 

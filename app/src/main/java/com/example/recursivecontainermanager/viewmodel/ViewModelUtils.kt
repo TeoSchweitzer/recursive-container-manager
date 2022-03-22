@@ -35,12 +35,18 @@ open class ViewModelUtils: ViewModel() {
     private fun passesTagFilter(tagFilters: List<String>, item: Item): Boolean {
         for (tagFilter in tagFilters) {
             if (tagFilter == "") continue
-            var tagFound = false
+            var filter = tagFilter
+            if (filter.startsWith('!')) filter = filter.substring(1)
+            var tagFound = false//tagFilter.startsWith('!')
             for (tag in item.tags?:listOf()) {
-                if (tag.lowercase().contains(tagFilter.lowercase()) && tagFilter.startsWith('!')) return false
-                if (tag.lowercase().contains(tagFilter.lowercase())) tagFound = true
+                if (tag.lowercase().contains(filter.lowercase())) {
+                    tagFound = true
+                    break
+                }
             }
-            if (!tagFound) return false
+            if ((!tagFound && !tagFilter.startsWith('!')) ||
+                (tagFound && tagFilter.startsWith('!')))
+                    return false
         }
         return true
     }

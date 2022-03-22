@@ -35,7 +35,7 @@ class ItemListAdapter(private val itemList: List<Item>,
     class ItemViewHolder(var context: Context, var binding: ItemInListViewBinding):
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Item, withPosition: Boolean, isLast: Boolean) {
-            binding.itemNameText.text = item.name
+            binding.itemNameTitle.text = item.name
             if (withPosition && !isLast) {
                 binding.positionDescriptionText.visibility = View.VISIBLE
                 if (item.position == "")

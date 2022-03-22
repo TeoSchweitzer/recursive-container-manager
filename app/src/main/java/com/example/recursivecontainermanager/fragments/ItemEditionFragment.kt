@@ -1,5 +1,6 @@
 package com.example.recursivecontainermanager.fragments
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.ClipDescription
 import android.content.ClipboardManager
@@ -49,8 +50,10 @@ class ItemEditionFragment: DialogFragment() {
             .create()
     }
 
+    @SuppressLint("SetTextI18n")
     fun setupForAddition() {
         binding.itemOwnersField.setText(viewModel.currentUser)
+        binding.itemTagsField.setText("container")
         val d = dialog as AlertDialog?
         val positiveButton: Button = d!!.getButton(AlertDialog.BUTTON_POSITIVE)
         positiveButton.setOnClickListener {
@@ -62,6 +65,7 @@ class ItemEditionFragment: DialogFragment() {
                 binding.itemTagsField.text.toString(),
                 binding.itemPositionField.text.toString()
             )
+            d.dismiss()
         }
     }
 
@@ -78,6 +82,7 @@ class ItemEditionFragment: DialogFragment() {
                 binding.itemTagsField.text.toString(),
                 binding.itemPositionField.text.toString()
             )
+            d.dismiss()
         }
     }
 

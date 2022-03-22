@@ -51,18 +51,16 @@ class MainViewModel(private val treeDAO: TreeDAO, private val storage: SharedPre
     val itemSearch: LiveData<List<Item>> = _itemSearch
 
     fun fetchItems() {
-        if (!storage.contains(USER_KEY)) {
-            return
-        } else if (storage.getString(USER_KEY, "")!! != NO_USER){
-            setUser(
-                storage.getString(USER_KEY, "")!!,
-                storage.getString(SESSION_KEY, "")!!,
-                storage.getString(ETAG_KEY, "")!!
-            )
+        if (!storage.contains(USER_KEY)) return
+        else {
+            currentUser = storage.getString(USER_KEY, "")!!
+            MainApi.setSessionCookie(storage.getString(SESSION_KEY, "")?:"")
+            MainApi.setItemsEtag(storage.getString(ETAG_KEY, "")?:"")
         }
         if (storage.contains(ADDRESS_KEY))
             newServerAddress(storage.getString(ADDRESS_KEY,"")!!)
 
+        _loadingStatus.value = R.string.refresh_loading
         viewModelScope.launch(Dispatchers.IO) {
             executeItemFetching()
         }
@@ -70,7 +68,6 @@ class MainViewModel(private val treeDAO: TreeDAO, private val storage: SharedPre
 
     private suspend fun executeItemFetching() {
         if (currentUser == null) { _loadingStatus.postValue( R.string.refresh_done); return}
-        _loadingStatus.postValue(R.string.refresh_loading)
 
         val newTree: Tree?
         try {
@@ -94,22 +91,25 @@ class MainViewModel(private val treeDAO: TreeDAO, private val storage: SharedPre
             storage.edit().putString(ETAG_KEY, MainApi.getItemsEtag()).apply()
         }
         val item: Item = if (currentItem.value == null) itemTree!!.item
-        else getSubTree(currentItem.value!!.location, itemTree!!)?.item?: itemTree!!.item
-        _currentItem.postValue(item)
-        _loadingStatus.postValue( R.string.refresh_done)
-        updateState(item, itemTree!!)
+            else getSubTree(currentItem.value!!.location, itemTree!!)?.item?: itemTree!!.item
+
+        resetState(item, itemTree!!)
+        _loadingStatus.postValue(R.string.refresh_done)
     }
 
     fun changeCurrentItem(item: Item) {
-        _currentItem.postValue( item)
-        updateState(item, itemTree!!)
+        resetState(item, itemTree!!)
     }
 
-    private fun updateState(item: Item, tree: Tree) {
-        _recursion.postValue(getMaxDepth(tree))
-        _itemContent.postValue( getItemContent(listOf("!container"), -1, getSubTree(item.location, tree)!!))
-        _itemLocation.postValue( getItemLocation(item, tree, mutableListOf()))
-        _itemSearch.postValue( listOf())
+    private fun resetState(item: Item, tree: Tree) {
+        val subTree = if (item.location == tree.item.location) tree else getSubTree(item.location, tree)!!
+        val maxRecurse = getMaxDepth(subTree)
+
+        _currentItem.postValue(item)
+        _recursion.postValue(maxRecurse)
+        _itemContent.postValue(getItemContent(listOf(), maxRecurse, subTree))
+        _itemLocation.postValue(getItemLocation(item, tree, mutableListOf()))
+        _itemSearch.postValue(listOf())
     }
 
     fun newServerAddress(address: String): Boolean {
@@ -120,16 +120,16 @@ class MainViewModel(private val treeDAO: TreeDAO, private val storage: SharedPre
     }
 
     fun createAccount(username: String, password: String) {
-        _loadingStatus.postValue( R.string.create_account_start)
+        _loadingStatus.postValue(R.string.create_account_start)
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 MainApi.createAccount(username, password)
+                _loadingStatus.postValue(R.string.create_account_done)
             } catch (e: UsernameExistsException) {
-                _loadingStatus.postValue( R.string.create_account_name_taken)
+                _loadingStatus.postValue(R.string.create_account_name_taken)
             } catch (e: Exception) {
-                _loadingStatus.postValue( R.string.unknown_error)
+                _loadingStatus.postValue(R.string.unknown_error)
             }
-            _loadingStatus.postValue( R.string.create_account_done)
         }
     }
 
@@ -139,10 +139,8 @@ class MainViewModel(private val treeDAO: TreeDAO, private val storage: SharedPre
             try {
                 MainApi.authenticate(username, password)
                 currentUser = username
-                storage.edit()
-                    .putString(USER_KEY, currentUser!!)
-                    .putString(SESSION_KEY, MainApi.getSessionCookie())
-                    .apply()
+                storage.edit().putString(USER_KEY, currentUser!!)
+                    .putString(SESSION_KEY, MainApi.getSessionCookie()).apply()
                 _loadingStatus.postValue( R.string.authenticate_done)
             } catch (e: InvalidCredentialsException) {
                 _loadingStatus.postValue( R.string.authenticate_user_not_found)
@@ -172,15 +170,9 @@ class MainViewModel(private val treeDAO: TreeDAO, private val storage: SharedPre
         }
     }
 
-    private fun setUser(username: String, session: String, items: String) {
-        currentUser = username
-        MainApi.setSessionCookie(session)
-        MainApi.setItemsEtag(items)
-    }
-
     fun newSearchFilter(nameFilter: String, tagFilter: String) {
         if (itemTree == null) return
-        _itemSearch.postValue( searchItems(
+        _itemSearch.postValue(searchItems(
             nameFilter,
             splitFilter(tagFilter),
             itemTree!!
@@ -188,21 +180,20 @@ class MainViewModel(private val treeDAO: TreeDAO, private val storage: SharedPre
     }
 
     fun newContentFilter(changeDepth: Int, contentFilter: String) {
-        val max = getMaxDepth(getSubTree(currentItem.value!!.location, itemTree!!)!!)
+        val subtree = if (currentItem.value!!.location == itemTree!!.item.location) itemTree!!
+            else getSubTree(currentItem.value!!.location, itemTree!!)!!
+        val max = getMaxDepth(subtree)
+        var recurse = _recursion.value!!
         when (changeDepth) {
-            -2 -> _recursion.postValue( 0)
-            -1 -> if (recursion.value!! > 0) _recursion.postValue( _recursion.value?.minus(1))
-            0  -> return
-            +1 -> if (recursion.value!! < max) _recursion.postValue( _recursion.value?.plus(1))
-            +2 -> _recursion.postValue( max)
+            -2 -> recurse = 0
+            -1 -> if (recurse > 0) recurse--
+             0 -> {}
+            +1 -> if (recurse < max) recurse++
+            +2 -> recurse = max
         }
-        _itemContent.postValue( getItemContent(
-            splitFilter(contentFilter),
-            recursion.value!!,
-            getSubTree(currentItem.value!!.location, itemTree!!)!!
-        ))
+        _recursion.postValue(recurse)
+        _itemContent.postValue(getItemContent(splitFilter(contentFilter), recurse, subtree))
     }
-
 
     fun getQrCode(context: Context): ImageView {
         var text = "No Data Yet"
@@ -269,6 +260,10 @@ class MainViewModel(private val treeDAO: TreeDAO, private val storage: SharedPre
 
     fun addItem(name:String,owners:String,subOwners:String,readOnly:String,tags:String,position:String) {
         if (currentItem.value == null) return
+        if (currentItem.value!!.tags?.contains("container") != true) {
+            _loadingStatus.postValue( R.string.item_edition_not_container)
+            return
+        }
         val newItem = Item("", name, currentItem.value!!.location,
             splitFilter(owners),
             splitFilter(subOwners),
@@ -280,9 +275,10 @@ class MainViewModel(private val treeDAO: TreeDAO, private val storage: SharedPre
         _loadingStatus.postValue( R.string.item_edition_start)
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                MainApi.addItem(newItem)
-                _loadingStatus.postValue( R.string.item_edition_done)
+                newItem.location = MainApi.addItem(newItem)
+                _loadingStatus.postValue(R.string.item_edition_done)
                 executeItemFetching()
+                changeCurrentItem(newItem)
             } catch (e: EditionConflictException) {
                 executeItemFetching()
                 _loadingStatus.postValue( R.string.item_edition_conflict)
@@ -319,6 +315,15 @@ class MainViewModel(private val treeDAO: TreeDAO, private val storage: SharedPre
 
     fun importItem(itemJson: String): Item {
         return jacksonObjectMapper().readValue(itemJson)
+    }
+
+    fun itemIsContainer(): Boolean {
+        return currentItem.value?.tags?.contains("container")?:false
+    }
+
+    fun userIsReadonly(): Boolean {
+        return (!currentItem.value?.owners?.contains(currentUser)!! &&
+                !currentItem.value?.subOwners?.contains(currentUser)!! )
     }
 }
 
